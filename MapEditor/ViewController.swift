@@ -16,11 +16,14 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     var currentTileID = 0;
     
     let tileImages = [0,1,2,3,4,5,6,7,8,9,10,11]
+    var trackArray = [480]
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureMapCollectionView()
         configureTileCollectionView()
+        
+        initTrackArray()
         
         mapCollectionView.delegate = self
         mapCollectionView.dataSource = self
@@ -44,6 +47,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         }
         else{
             return 1
+        
         }
     }
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -74,6 +78,12 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             let index = convertToStringFrom(indexPath: indexPaths)
             let item = collectionView.item(at: index) as! CollectionViewItem
             item.changeImage(imgUrl: "\(currentTileID)")
+            
+            // track 
+            
+            trackArray[index] = currentTileID
+            
+            
         }
         else{
             let index = convertToStringFrom(indexPath: indexPaths)
@@ -84,6 +94,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
 
 
     
+    // Functions
     private func configureMapCollectionView() {
         
         let flowLayout = NSCollectionViewFlowLayout()
@@ -113,8 +124,42 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         tileCollectionView.isSelectable = true
     }
     
+    func initTrackArray(){
+        var i = 0
+        while ( i < 480){
+            trackArray.append(0)
+            i += 1
+        }
+    }
     
     
     
+    @IBAction func saveBtn(_ sender: Any) {
+        let file = "file.txt"
+       
+
+        var outputText = ""
+        for i in 0..<trackArray.count{
+            outputText += "\(trackArray[i]) "
+        }
+        
+        
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            
+            let path = dir.appendingPathComponent(file)
+            
+            //writing
+            do {
+                try outputText.write(to: path, atomically: false, encoding: String.Encoding.utf8)
+            }
+            catch {/* error handling here */}
+            
+            //reading
+            do {
+                let text2 = try String(contentsOf: path, encoding: String.Encoding.utf8)
+            }
+            catch {/* error handling here */}
+        }
+    }
 }
 
