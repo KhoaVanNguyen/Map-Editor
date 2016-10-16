@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D225E9091DB34F5F0068F395 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225E9081DB34F5F0068F395 /* Constant.swift */; };
+		D225E90B1DB355C30068F395 /* TileCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225E90A1DB355C30068F395 /* TileCollectionViewItem.swift */; };
 		D2A0A64C1DB27B4E002FAB2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0A64B1DB27B4E002FAB2A /* AppDelegate.swift */; };
 		D2A0A64E1DB27B4E002FAB2A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0A64D1DB27B4E002FAB2A /* ViewController.swift */; };
 		D2A0A6501DB27B4E002FAB2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2A0A64F1DB27B4E002FAB2A /* Assets.xcassets */; };
 		D2A0A65C1DB27D43002FAB2A /* CollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0A65A1DB27D43002FAB2A /* CollectionViewItem.swift */; };
 		D2A0A6631DB288B1002FAB2A /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0A6621DB288B1002FAB2A /* Tile.swift */; };
-		D2A0A6681DB31A21002FAB2A /* TileCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0A6671DB31A21002FAB2A /* TileCollectionController.swift */; };
-		D2A0A66C1DB31B4D002FAB2A /* TileCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0A66A1DB31B4D002FAB2A /* TileCollectionViewItem.swift */; };
 		D2D402FC1DB32FD600E602BE /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D402FA1DB32FD600E602BE /* CollectionViewItem.xib */; };
 		D2D402FD1DB32FD600E602BE /* TileCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D402FB1DB32FD600E602BE /* TileCollectionViewItem.xib */; };
 		D2D403001DB32FEF00E602BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D402FE1DB32FEF00E602BE /* Main.storyboard */; };
@@ -21,14 +21,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D225E9081DB34F5F0068F395 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		D225E90A1DB355C30068F395 /* TileCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileCollectionViewItem.swift; sourceTree = "<group>"; };
 		D2A0A6481DB27B4E002FAB2A /* MapEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2A0A64B1DB27B4E002FAB2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2A0A64D1DB27B4E002FAB2A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D2A0A64F1DB27B4E002FAB2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2A0A65A1DB27D43002FAB2A /* CollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewItem.swift; sourceTree = "<group>"; };
 		D2A0A6621DB288B1002FAB2A /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
-		D2A0A6671DB31A21002FAB2A /* TileCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileCollectionController.swift; sourceTree = "<group>"; };
-		D2A0A66A1DB31B4D002FAB2A /* TileCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileCollectionViewItem.swift; sourceTree = "<group>"; };
 		D2D402FA1DB32FD600E602BE /* CollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CollectionViewItem.xib; path = MapEditor/CollectionViewItem.xib; sourceTree = "<group>"; };
 		D2D402FB1DB32FD600E602BE /* TileCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TileCollectionViewItem.xib; path = MapEditor/TileCollectionViewItem.xib; sourceTree = "<group>"; };
 		D2D402FF1DB32FEF00E602BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MapEditor/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -46,6 +46,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D225E9071DB34F3D0068F395 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D225E9081DB34F5F0068F395 /* Constant.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		D2A0A63F1DB27B4E002FAB2A = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				D2A0A64B1DB27B4E002FAB2A /* AppDelegate.swift */,
+				D225E9071DB34F3D0068F395 /* Helpers */,
 				D2A0A65E1DB28213002FAB2A /* Views */,
 				D2A0A65F1DB2821C002FAB2A /* Models */,
 				D2A0A6641DB28CD7002FAB2A /* Controller */,
@@ -80,7 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				D2A0A65A1DB27D43002FAB2A /* CollectionViewItem.swift */,
-				D2A0A66A1DB31B4D002FAB2A /* TileCollectionViewItem.swift */,
+				D225E90A1DB355C30068F395 /* TileCollectionViewItem.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -97,7 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				D2A0A64D1DB27B4E002FAB2A /* ViewController.swift */,
-				D2A0A6671DB31A21002FAB2A /* TileCollectionController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -188,12 +196,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D225E9091DB34F5F0068F395 /* Constant.swift in Sources */,
 				D2A0A64E1DB27B4E002FAB2A /* ViewController.swift in Sources */,
-				D2A0A6681DB31A21002FAB2A /* TileCollectionController.swift in Sources */,
-				D2A0A66C1DB31B4D002FAB2A /* TileCollectionViewItem.swift in Sources */,
 				D2A0A6631DB288B1002FAB2A /* Tile.swift in Sources */,
 				D2A0A64C1DB27B4E002FAB2A /* AppDelegate.swift in Sources */,
 				D2A0A65C1DB27D43002FAB2A /* CollectionViewItem.swift in Sources */,
+				D225E90B1DB355C30068F395 /* TileCollectionViewItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

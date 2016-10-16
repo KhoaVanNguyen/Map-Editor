@@ -11,12 +11,17 @@ import Cocoa
 class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectionViewDelegate{
     @IBOutlet weak var mapCollectionView: NSCollectionView!
     
-    @IBOutlet weak var tileCollectionView: TileCollectionController!
-    let names = ["Khoa", "Linh", "Duyen", "Hoa"]
+    @IBOutlet weak var tileCollectionView: NSCollectionView!
+   
+    var currentTileID = 0;
+    
+    let tileImages = [0,1,2,3,4,5,6,7,8,9,10,11]
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureCollectionView()
+        configureMapCollectionView()
+        configureTileCollectionView()
+        
         mapCollectionView.delegate = self
         mapCollectionView.dataSource = self
         
@@ -31,20 +36,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         // Update the view, if already loaded.
         }
     }
-    private func configureCollectionView() {
-
-        let flowLayout = NSCollectionViewFlowLayout()
-        flowLayout.itemSize = NSSize(width: 32.0, height: 32.0)
-       // flowLayout.sectionInset = EdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
-        flowLayout.minimumInteritemSpacing = 1
-        flowLayout.minimumLineSpacing = 1
-        mapCollectionView.collectionViewLayout = flowLayout
-    
-        view.wantsLayer = true
-
-        mapCollectionView.layer?.backgroundColor = NSColor.black.cgColor
-        mapCollectionView.isSelectable = true
-    }
+   
 
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
         if collectionView == self.mapCollectionView{
@@ -59,7 +51,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             return 480
         }
         else{
-            return 4
+            return tileImages.count
         }
     }
     
@@ -68,39 +60,58 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
        
         if ( collectionView == self.mapCollectionView  ){
         let item = collectionView.makeItem(withIdentifier: "CollectionViewItem", for: indexPath) as! CollectionViewItem
-        //item.changeTitle(str: names[indexPath.item])
         return item
         }
         else {
             let item = collectionView.makeItem(withIdentifier: "TileCollectionViewItem", for: indexPath) as! TileCollectionViewItem
-            //item.changeTitle(str: names[indexPath.item])
+           item.loadTile(imgUrl: "\(tileImages[indexPath.item])")
             return item
         }
     }
     
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         if collectionView == self.mapCollectionView{
-            print(indexPaths.debugDescription)        }
-        else{
-            print("HELLO")
+            let index = convertToStringFrom(indexPath: indexPaths)
+            let item = collectionView.item(at: index) as! CollectionViewItem
+            item.changeImage(imgUrl: "\(currentTileID)")
         }
-        
-        
+        else{
+            let index = convertToStringFrom(indexPath: indexPaths)
+            currentTileID = index
+             print(index)
+        }
     }
 
 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    private func configureMapCollectionView() {
+        
+        let flowLayout = NSCollectionViewFlowLayout()
+        flowLayout.itemSize = NSSize(width: 32.0, height: 32.0)
+        // flowLayout.sectionInset = EdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
+        flowLayout.minimumInteritemSpacing = 1
+        flowLayout.minimumLineSpacing = 1
+        mapCollectionView.collectionViewLayout = flowLayout
+        
+        view.wantsLayer = true
+        
+        mapCollectionView.layer?.backgroundColor = NSColor.black.cgColor
+        mapCollectionView.isSelectable = true
+    }
+    private func configureTileCollectionView() {
+        
+        let flowLayout = NSCollectionViewFlowLayout()
+        flowLayout.itemSize = NSSize(width: 32.0, height: 32.0)
+        // flowLayout.sectionInset = EdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
+        flowLayout.minimumInteritemSpacing = 1
+        flowLayout.minimumLineSpacing = 1
+        mapCollectionView.collectionViewLayout = flowLayout
+        
+        view.wantsLayer = true
+        
+        tileCollectionView.layer?.backgroundColor = NSColor.black.cgColor
+        tileCollectionView.isSelectable = true
+    }
     
     
     

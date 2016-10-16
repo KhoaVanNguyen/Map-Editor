@@ -742,8 +742,8 @@
                                         <collectionView ambiguous="YES" selectable="YES" id="Vq6-Hr-HFP" customClass="TileCollectionController" customModule="MapEditor" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="277" height="348"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="mfD-Kd-fk5">
-                                                <size key="itemSize" width="100" height="100"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="1" minimumLineSpacing="1" id="mfD-Kd-fk5">
+                                                <size key="itemSize" width="32" height="32"/>
                                             </collectionViewFlowLayout>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </collectionView>

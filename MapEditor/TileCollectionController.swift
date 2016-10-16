@@ -9,10 +9,6 @@
 import Cocoa
 
 class TileCollectionController: NSCollectionView, NSCollectionViewDelegate, NSCollectionViewDataSource {
-
-    let names = ["Khoa", "Linh","HA","Nam"]
-
-
     
     @available(OSX 10.11, *)
     public func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {

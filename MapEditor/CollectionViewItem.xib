@@ -6,8 +6,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="CollectionViewItem" customModule="LoadCollection" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="CollectionViewItem" customModule="MapEditor" customModuleProvider="target">
             <connections>
+                <outlet property="mapImage" destination="msT-Zt-1iH" id="3WT-L3-JPN"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -23,7 +24,7 @@
                         <constraint firstAttribute="height" constant="32" id="71N-al-OyG"/>
                         <constraint firstAttribute="width" constant="32" id="FcH-Rc-gcu"/>
                     </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="button" image="offline" id="OBQ-nB-ZDO"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="button" image="black" id="OBQ-nB-ZDO"/>
                 </imageView>
             </subviews>
             <constraints>
@@ -33,9 +34,9 @@
                 <constraint firstItem="msT-Zt-1iH" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="v7w-zS-Jg7"/>
             </constraints>
         </customView>
-        <collectionViewItem id="foS-c7-JBR" customClass="CollectionViewItem" customModule="LoadCollection" customModuleProvider="target"/>
+        <collectionViewItem id="foS-c7-JBR" customClass="CollectionViewItem" customModule="MapEditor" customModuleProvider="target"/>
     </objects>
     <resources>
-        <image name="offline" width="20" height="20"/>
+        <image name="black" width="64" height="64"/>
     </resources>
 </document>
