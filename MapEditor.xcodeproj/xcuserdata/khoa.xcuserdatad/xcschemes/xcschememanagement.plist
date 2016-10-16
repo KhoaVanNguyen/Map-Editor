@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Map Editor.xcscheme</key>
+		<key>LoadCollection.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>D28F1A5B1DB335DE00500DFD</key>
+		<key>D2A0A6471DB27B4E002FAB2A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

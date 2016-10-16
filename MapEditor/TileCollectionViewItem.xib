@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11535.1" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11535.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="TileCollectionViewItem" customModule="LoadCollection" customModuleProvider="target">
+            <connections>
+                <outlet property="nameLbl" destination="Q71-zV-Yjr" id="Q93-yy-0Ch"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <collectionViewItem id="P8Q-q5-A7L" customClass="TileCollectionViewItem" customModule="LoadCollection" customModuleProvider="target"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="90" height="39"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q71-zV-Yjr">
+                    <rect key="frame" x="11" y="13" width="61" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Helllo" id="XDO-sB-qhN">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Q71-zV-Yjr" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="13" id="JzZ-KU-tlY"/>
+                <constraint firstItem="Q71-zV-Yjr" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="9" id="RiR-DM-Qc8"/>
+                <constraint firstAttribute="bottom" secondItem="Q71-zV-Yjr" secondAttribute="bottom" constant="13" id="gd9-rt-hTm"/>
+                <constraint firstAttribute="trailing" secondItem="Q71-zV-Yjr" secondAttribute="trailing" constant="20" id="iII-hC-gKb"/>
+            </constraints>
+        </customView>
+    </objects>
+</document>

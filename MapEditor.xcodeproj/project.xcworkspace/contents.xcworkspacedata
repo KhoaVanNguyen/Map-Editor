@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Map Editor.xcodeproj">
+      location = "self:/Users/khoa/Documents/DATA/Learning IOS/LoadCollection/MapEditor.xcodeproj">
    </FileRef>
 </Workspace>

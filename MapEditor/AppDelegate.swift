@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Map Editor
+//  LoadCollection
 //
-//  Created by Khoa on 10/16/16.
+//  Created by Khoa on 10/15/16.
 //  Copyright © 2016 Khoa. All rights reserved.
 //
 
