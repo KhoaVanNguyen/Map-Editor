@@ -8,6 +8,7 @@
 
 import Cocoa
 import ImageIO
+import AppKit
 class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectionViewDelegate{
     
     @IBOutlet weak var mapCollectionView: NSCollectionView!
@@ -15,13 +16,13 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     @IBOutlet weak var tileCollectionView: NSCollectionView!
    
     var currentTileID = 0;
+
+    var exportedImage = NSImage()
     
-    let tileImages = [00,01,02,03,04,05,06,07,08,09,010,
-                    011,012,012,014,015,016,017,018,019,
-                    020,021,022,023,024,025,026,027,028,029,
-                    030,031,032,033,034,035,036,037,038,039,
-                     040,041,042,043,044,045,046,047,048
-                      ]
+    var cursor = NSCursor()
+    let tileImages = [0,1,2,3,4,5,6,7,8,9,10,11,12,12,14,15,16,17,18,19,20,
+                      21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,
+                     40,41,42,43,44,45,46,47,48]
     var trackArray = [480]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +78,8 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         else {
             let item = collectionView.makeItem(withIdentifier: "TileCollectionViewItem", for: indexPath) as! TileCollectionViewItem
            item.loadTile("\(tileImages[indexPath.item])")
+            
+            print("\(tileImages[indexPath.item])")
             return item
         }
     }
@@ -91,7 +94,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             
             trackArray[index] = currentTileID
             
-            changeCursorImge(index: "\(currentTileID)")
+           // changeCursorImge(index: "\(currentTileID)")
         }
         else{
             
@@ -141,18 +144,100 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         }
     }
  
-    override func mouseDown(with event: NSEvent) {
-       
+    override func mouseEntered(with event: NSEvent) {
+     
+            changeCursorImge(index: "\(currentTileID)")
     }
     
     func changeCursorImge(index : String){
         let img = NSImage(named: "\(index)")
-        let resizeImg = resizeTo(image: img!, w: 20, h: 20)
-        let point = NSPoint(x: 16, y: 16)
-        let cursor = NSCursor(image: resizeImg, hotSpot: point)
+        let resizeImg = resizeTo(image: img!, w: 32, h: 32)
+        let point = NSPoint(x: 10, y: 10)
+        cursor = NSCursor(image: resizeImg, hotSpot: point)
         cursor.set()
     }
     
+    
+    func exportImage(){
+        let rows = 1
+        let columns = 48
+        var width = 0.0
+        let height = 0
+        
+        if ( rows == 1 ){
+            for i in 0..<tileImages.count{
+                let tileW = NSImage(named: "\(i)")?.size.width
+                // let tileH = NSImage(named: "\(i)")?.size.heigh
+                width += Double(tileW!)
+            }
+        
+        }
+        
+        print(" width \(width)")
+        
+    }
+    
+    @IBAction func exportImageBtn(_ sender: Any) {
+        exportImage()
+        
+        let rect = CGRect(x: 50, y: 50, width: 1538, height: 320)
+        
+      //  let inputImg = NSImage(named: "47")
+        
+        let wallImg = NSImage(named: "47")
+        
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+    
+        let context = CGContext(
+            data: nil,
+            width: Int(rect.width),
+            height: Int(rect.height),
+            bitsPerComponent: 8,
+            bytesPerRow: 0,
+            space: colorSpace,
+            bitmapInfo: bitmapInfo.rawValue)
+        
+       // drawFunc(context: context)
+        let temp = CGRect(x: 100, y: 320, width: 50, height: 50)
+        
+        context?.setStrokeColor(CGColor.black)
+        context?.setFillColor(CGColor.black)
+       
+    
+        let imageRef  = wallImg?.cgImage(forProposedRect: nil, context: nil, hints: nil)
+        
+//        imageRef?.cropping(to: temp)
+        
+        context?.draw(imageRef!, in: temp)
+        let image = context!.makeImage()
+      
+        
+        
+        
+    
+//        let cgImgRef = image.cgImage(forProposedRect: nil, context: nil, hints: nil)
+        let bmpImgRef = NSBitmapImageRep(cgImage: image!)
+        
+    
+        let pngData = bmpImgRef.representation(using: .PNG, properties: [:])
+        
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            
+             let file = "image.png"
+            
+            let path = dir.appendingPathComponent(file)
+            
+            //writing
+            do {
+               try  pngData?.write(to: path)
+            }
+            catch {/* error handling here */}
+            
+            
+        }
+
+    }
     @IBAction func saveBtn(_ sender: Any) {
         let file = "file.txt"
        
@@ -173,11 +258,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             }
             catch {/* error handling here */}
             
-            //reading
-            do {
-                let text2 = try String(contentsOf: path, encoding: String.Encoding.utf8)
-            }
-            catch {/* error handling here */}
+
         }
     }
 }
