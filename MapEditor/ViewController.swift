@@ -23,7 +23,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     let tileImages = [0,1,2,3,4,5,6,7,8,9,10,11,12,12,14,15,16,17,18,19,20,
                       21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,
                      40,41,42,43,44,45,46,47,48]
-    var trackArray = [480]
+    var trackArray = [Int]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -138,8 +138,9 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     func initTrackArray(){
         var i = 0
-        while ( i < 480){
+        while ( i <= 479){
             trackArray.append(0)
+            
             i += 1
         }
     }
@@ -159,65 +160,23 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     
     func exportImage(){
-        let rows = 1
-        let columns = 48
-        var width = 0.0
-        let height = 0
-        
-        if ( rows == 1 ){
-            for i in 0..<tileImages.count{
-                let tileW = NSImage(named: "\(i)")?.size.width
-                // let tileH = NSImage(named: "\(i)")?.size.heigh
-                width += Double(tileW!)
-            }
-        
-        }
-        
-        print(" width \(width)")
+     
         
     }
     
     @IBAction func exportImageBtn(_ sender: Any) {
         exportImage()
         
-        let rect = CGRect(x: 50, y: 50, width: 1538, height: 320)
-        
-      //  let inputImg = NSImage(named: "47")
-        
-        let wallImg = NSImage(named: "47")
-        
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
-    
-        let context = CGContext(
-            data: nil,
-            width: Int(rect.width),
-            height: Int(rect.height),
-            bitsPerComponent: 8,
-            bytesPerRow: 0,
-            space: colorSpace,
-            bitmapInfo: bitmapInfo.rawValue)
-        
-       // drawFunc(context: context)
-        let temp = CGRect(x: 100, y: 320, width: 50, height: 50)
-        
-        context?.setStrokeColor(CGColor.black)
-        context?.setFillColor(CGColor.black)
-       
-    
-        let imageRef  = wallImg?.cgImage(forProposedRect: nil, context: nil, hints: nil)
-        
-//        imageRef?.cropping(to: temp)
-        
-        context?.draw(imageRef!, in: temp)
-        let image = context!.makeImage()
       
+        
+
+        let cgImg = createSimpleOutputImage(arr: tileImages)
         
         
         
     
 //        let cgImgRef = image.cgImage(forProposedRect: nil, context: nil, hints: nil)
-        let bmpImgRef = NSBitmapImageRep(cgImage: image!)
+        let bmpImgRef = NSBitmapImageRep(cgImage: cgImg)
         
     
         let pngData = bmpImgRef.representation(using: .PNG, properties: [:])

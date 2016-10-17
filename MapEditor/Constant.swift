@@ -33,3 +33,107 @@ func resizeTo(image: NSImage, w: Int, h: Int) -> NSImage {
     newImage.size = destSize
     return NSImage(data: newImage.tiffRepresentation! )!
 }
+
+
+
+func createOutputImage( ) -> CGImage{
+    
+    // output image size
+    let rect = CGRect(x: 0, y: 0, width: 1538, height: 320)
+    
+    //  let inputImg = NSImage(named: "47")
+    
+    let wallImg = NSImage(named: "47")
+    
+    let colorSpace = CGColorSpaceCreateDeviceRGB()
+    let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+    
+    let context = CGContext(
+        data: nil,
+        width: Int(rect.width),
+        height: Int(rect.height),
+        bitsPerComponent: 8,
+        bytesPerRow: 0,
+        space: colorSpace,
+        bitmapInfo: bitmapInfo.rawValue)
+    
+    context?.translateBy(x: 0, y: 288)
+    //                          y = Width - tileH
+    
+    // drawFunc(context: context)
+    let temp = CGRect(x: 0, y: 0, width: 32, height: 32)
+    
+    
+    let imageRef  = wallImg?.cgImage(forProposedRect: nil, context: nil, hints: nil)
+    
+    
+    
+    context?.draw(imageRef!, in: temp)
+    let image = context!.makeImage()
+    
+    
+    return image!
+}
+
+func convert2DArrayFrom( arr : [Int], row : Int, column : Int ) -> [[Int]]{
+    var outputArr : [[Int]] = [[ row , column  ]]
+    var count = 0
+    for i in 0..<row{
+        
+        for j in 0..<column{
+//
+                outputArr[i][j] = arr[ j*i + j]
+          
+        }
+    }
+    return outputArr
+}
+
+
+
+
+func createSimpleOutputImage( arr : [Int]) -> CGImage{
+    
+    // output image size
+    let rect = CGRect(x: 0, y: 0, width: 1568, height: 32)
+    
+    //  let inputImg = NSImage(named: "47")
+    
+    
+    
+    let colorSpace = CGColorSpaceCreateDeviceRGB()
+    let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+    
+    let context = CGContext(
+        data: nil,
+        width: Int(rect.width),
+        height: Int(rect.height),
+        bitsPerComponent: 8,
+        bytesPerRow: 0,
+        space: colorSpace,
+        bitmapInfo: bitmapInfo.rawValue)
+    
+    context?.translateBy(x: 0, y: 0)
+    //                          y = Width - tileH
+    
+    // drawFunc(context: context)
+    
+    for i in 0..<arr.count{
+        let temp = CGRect(x: i*32, y: 0, width: 32, height: 32)
+        let wallImg = NSImage(named: "\(arr[i])")
+        let imageRef  = wallImg?.cgImage(forProposedRect: nil, context: nil, hints: nil)
+        context?.draw(imageRef!, in: temp)
+     //   context?.saveGState()
+    
+    
+    }
+
+
+    
+    
+    let image = context!.makeImage()
+    
+    
+    return image!
+}
+
