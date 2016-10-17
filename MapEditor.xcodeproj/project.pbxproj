@@ -154,6 +154,7 @@
 					D2A0A6471DB27B4E002FAB2A = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = WG937QNZTU;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 				};

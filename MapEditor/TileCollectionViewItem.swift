@@ -16,7 +16,8 @@ class TileCollectionViewItem: NSCollectionViewItem {
         // Do view setup here.
     }
  
-    func loadTile(imgUrl : String){
+    func loadTile(_ imgUrl : String){
         tileImage.image = NSImage(named: imgUrl)
     }
+    
 }

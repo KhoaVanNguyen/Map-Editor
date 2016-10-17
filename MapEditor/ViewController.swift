@@ -7,15 +7,21 @@
 //
 
 import Cocoa
-
+import ImageIO
 class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectionViewDelegate{
+    
     @IBOutlet weak var mapCollectionView: NSCollectionView!
     
     @IBOutlet weak var tileCollectionView: NSCollectionView!
    
     var currentTileID = 0;
     
-    let tileImages = [0,1,2,3,4,5,6,7,8,9,10,11]
+    let tileImages = [00,01,02,03,04,05,06,07,08,09,010,
+                    011,012,012,014,015,016,017,018,019,
+                    020,021,022,023,024,025,026,027,028,029,
+                    030,031,032,033,034,035,036,037,038,039,
+                     040,041,042,043,044,045,046,047,048
+                      ]
     var trackArray = [480]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +36,8 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         
         tileCollectionView.delegate = self
         tileCollectionView.dataSource = self
+        
+        changeCursorImge(index: "\(currentTileID)")
        
         // Do any additional setup after loading the view.
     }
@@ -68,31 +76,32 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         }
         else {
             let item = collectionView.makeItem(withIdentifier: "TileCollectionViewItem", for: indexPath) as! TileCollectionViewItem
-           item.loadTile(imgUrl: "\(tileImages[indexPath.item])")
+           item.loadTile("\(tileImages[indexPath.item])")
             return item
         }
     }
     
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         if collectionView == self.mapCollectionView{
-            let index = convertToStringFrom(indexPath: indexPaths)
+            let index = convertToStringFrom(indexPaths)
             let item = collectionView.item(at: index) as! CollectionViewItem
-            item.changeImage(imgUrl: "\(currentTileID)")
+            item.changeImage("\(currentTileID)")
             
             // track 
             
             trackArray[index] = currentTileID
             
-            
+            changeCursorImge(index: "\(currentTileID)")
         }
         else{
-            let index = convertToStringFrom(indexPath: indexPaths)
+            
+            let index = convertToStringFrom(indexPaths)
             currentTileID = index
              print(index)
+            changeCursorImge(index: "\(index)")
+           
         }
     }
-
-
     
     // Functions
     private func configureMapCollectionView() {
@@ -131,8 +140,18 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             i += 1
         }
     }
+ 
+    override func mouseDown(with event: NSEvent) {
+       
+    }
     
-    
+    func changeCursorImge(index : String){
+        let img = NSImage(named: "\(index)")
+        let resizeImg = resizeTo(image: img!, w: 20, h: 20)
+        let point = NSPoint(x: 16, y: 16)
+        let cursor = NSCursor(image: resizeImg, hotSpot: point)
+        cursor.set()
+    }
     
     @IBAction func saveBtn(_ sender: Any) {
         let file = "file.txt"
@@ -162,4 +181,6 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         }
     }
 }
+
+
 

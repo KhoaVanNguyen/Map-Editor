@@ -18,7 +18,7 @@ class CollectionViewItem: NSCollectionViewItem {
         view.wantsLayer = true
     }
     
-    func changeImage(imgUrl : String ){
+    func changeImage(_ imgUrl : String ){
         mapImage.image = NSImage(named: imgUrl)
     }
     
