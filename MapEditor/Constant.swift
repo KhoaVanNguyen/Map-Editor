@@ -137,3 +137,26 @@ func createSimpleOutputImage( arr : [Int]) -> CGImage{
     return image!
 }
 
+
+
+func writeToFile(content: String, fileName: String) {
+    
+    let contentToAppend = content+"\n"
+    let filePath = NSHomeDirectory() + "/Documents/" + fileName
+    
+    //Check if file exists
+    if let fileHandle = FileHandle(forWritingAtPath: filePath) {
+        //Append to file
+        fileHandle.seekToEndOfFile()
+        fileHandle.write(contentToAppend.data(using: String.Encoding.utf8)!)
+    }
+    else {
+        //Create new file
+        do {
+            try contentToAppend.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
+        } catch {
+            print("Error creating \(filePath)")
+        }
+    }
+}
+

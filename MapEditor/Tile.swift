@@ -11,16 +11,21 @@ import Cocoa
 import AppKit
 
 class Tile {
-    
     var imageUrl : String
+    var index : Int
+    var id : Int
     var x : Int
     var y : Int
-    var index : Int
+    var width : Int
+    var height : Int
     
-    init(_url : String, _x : Int, _y : Int, _index : Int) {
-        self.imageUrl = _url
-        self.x = _x
-        self.y = _y
-        self.index = _index
+    init( url : String, index : Int, id : Int, x : Int, y : Int , width : Int, height : Int ) {
+        self.imageUrl = url
+        self.index = index
+        self.id = id
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
     }
 }

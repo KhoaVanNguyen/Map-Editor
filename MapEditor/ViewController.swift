@@ -200,10 +200,19 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     @IBAction func saveBtn(_ sender: Any) {
         let file = "file.txt"
        
-
+        var countRow = 1;
+        
+        let row = 10;
+        let column = 48;
+        
         var outputText = ""
+        outputText += "\(row) \(column)\n"
         for i in 0..<trackArray.count{
-            outputText += "\(trackArray[i]) "
+            if ( i == 47 * countRow ){
+              outputText += "\n"
+                countRow += 1
+            }
+              outputText += "\(trackArray[i]) "
         }
         
         
