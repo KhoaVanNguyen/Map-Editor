@@ -19,6 +19,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
 
     var exportedImage = NSImage()
     
+    var listTiles = [Tile]()
     var cursor = NSCursor()
     let tileImages = [0,1,2,3,4,5,6,7,8,9,10,11,12,12,14,15,16,17,18,19,20,
                       21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,
@@ -31,6 +32,8 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         configureTileCollectionView()
         
         initTrackArray()
+        
+        
         
         mapCollectionView.delegate = self
         mapCollectionView.dataSource = self
@@ -93,14 +96,21 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             // track 
             
             trackArray[index] = currentTileID
+            let row = index / 48 // 48 == col
+            let col = index - (row * 48)
+            print(" index = \(index) at: [\(row),\(col)] ")
             
+            let x = col * 32
+            let y = row * 32
+            let tile = Tile(url:  "\(currentTileID)", index: index, id: index, x: x, y: y, width: 32, height: 32)
+            listTiles.append(tile)
            // changeCursorImge(index: "\(currentTileID)")
         }
         else{
             
             let index = convertToStringFrom(indexPaths)
             currentTileID = index
-             print(index)
+            
             changeCursorImge(index: "\(index)")
            
         }
@@ -141,6 +151,9 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         while ( i <= 479){
             trackArray.append(0)
             
+            
+            let tile = Tile(url: "-1", index: -1, id: 1, x: 0, y: 0, width: 0, height: 0)
+            listTiles.append(tile)
             i += 1
         }
     }
@@ -198,6 +211,11 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
 
     }
     @IBAction func saveBtn(_ sender: Any) {
+        
+        let tree = Tree(left: 0, top: 1536, size: 1536, tiles: listTiles, screen: 500, bitmapHeight: 384)
+        tree.Build(node: &tree.treeNode!)
+        tree.Save(node: tree.treeNode!)
+        
         let file = "file.txt"
        
         var countRow = 1;
