@@ -146,10 +146,19 @@ func createSimpleOutputImage( arr : [Int]) -> CGImage{
 
 
 
-func writeToFile(content: String, fileName: String) {
+func writeToFile(content: String, fileName: String , url : String) {
     
     let contentToAppend = content+"\n"
-    let filePath = NSHomeDirectory() + "/Documents/" + fileName
+    let filePath = String(describing: url) + fileName
+    
+    
+//    do {
+//        let fileHandle = try FileHandle(forWritingTo: url)
+//        fileHandle.seekToEndOfFile()
+//        fileHandle.write(contentToAppend.data(using: String.Encoding.utf8)!)
+//    catch{
+//        
+//    }
     
     //Check if file exists
     if let fileHandle = FileHandle(forWritingAtPath: filePath) {

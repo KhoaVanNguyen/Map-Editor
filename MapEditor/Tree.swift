@@ -42,15 +42,13 @@ class Tree{
         var i = globalTiles.count - 1;
         while ( i >= 0 ){
             
-          let tempRect = NSRect(x: globalTiles[i].x, y: globalTiles[i].y, width: globalTiles[i].width, height: globalTiles[i].height)
+          let tempRect = NSRect(x: globalTiles[i].x, y: globalTiles[i].y , width: globalTiles[i].width, height: globalTiles[i].height)
             
                 if ( nodeRect.intersects(tempRect) && nodeRect.size.width < CGFloat(200)
                     && globalTiles[i].id != -1 ){
-                    
-                node.listObject.append(globalTiles[i])
-                globalTiles.remove(at: i)
-
-            }
+                    node.listObject.append(globalTiles[i])
+                    globalTiles.remove(at: i)
+                }
             i -= 1;
         }
 }
@@ -61,13 +59,13 @@ class Tree{
     func Build(node :  Node){
         
         
-        if (!isWriteFirstNode){
-            nodeDetails  = GetNodeDetails(node: node)
-            quadTreeStr += nodeDetails + "\n"
-            
-            isWriteFirstNode = true
-            nodeDetails = ""
-        }
+//        if (!isWriteFirstNode){
+//            nodeDetails  = GetNodeDetails(node: node)
+//            quadTreeStr += nodeDetails + "\n"
+//            
+//            isWriteFirstNode = true
+//            nodeDetails = ""
+//        }
         if ( node.size < screen || globalTiles.count == 0  ){
             return
         }
@@ -100,23 +98,20 @@ class Tree{
         }
         else
         {
-            
             quadTreeStr += "\(node!.id) \(node!.left) \(node!.top) \(node!.size) "
             // Game Object cua mot node
             if ( node?.listObject.count != 0 ){
-            for i in 0..<Int((node?.listObject.count)!){
-                quadTreeStr += "\(node!.listObject[i].index) "
+                for i in 0..<Int((node?.listObject.count)!){
+                    quadTreeStr += "\(node!.listObject[i].index) "
                 }
             }
             quadTreeStr += "\n"
-    
+            
             // De Quy va Save lai
             Save( node: node?.leftTop )
             Save( node: node?.rightTop )
             Save( node: node?.leftBottom )
             Save( node: node?.rightBottom )
-     
-        
         }
        
     }

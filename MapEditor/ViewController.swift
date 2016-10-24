@@ -215,20 +215,35 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
                try  pngData?.write(to: path)
             }
             catch {/* error handling here */}
-            
-            
         }
-
     }
     @IBAction func saveBtn(_ sender: Any) {
         
+        
+       
         let tree = Tree(left: 0, top: 1536, size: 1536, tiles: listTiles, screen: 200, bitmapHeight: 384)
         tree.Build(node: tree.treeNode!)
-       tree.Save(node: tree.treeNode! )
+        tree.Save(node: tree.treeNode! )
         
-        saveQuadTreeFile()
+        let savePanel = NSSavePanel()
+        savePanel.setAccessibilityExpanded(true)
+        savePanel.canCreateDirectories = true
+        savePanel.title = "Save QuadTree File"
+        savePanel.allowedFileTypes = ["txt","docx"]
+        savePanel.begin { (result) in
+            
+            if result == NSFileHandlingPanelOKButton {
+                let savedUrl = savePanel.url
+                let fileName = savePanel.nameFieldStringValue
+                
+                let urlStr = savedUrl?.path
+                self.saveQuadTreeFile(quadtreeFileName: fileName, url: urlStr!)
+                
+            }
+        }
         
-        let file = "file.txt"
+        
+        let file = "tilemap.txt"
         
         var countRow = 1;
         
@@ -262,13 +277,13 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
 
     // MARK: SAVE QUADTREE FILE
     
-    func saveQuadTreeFile(){
+    func saveQuadTreeFile(quadtreeFileName : String, url : String ){
         
         var final = ""
         createListObject()
         
         final += listObjectStr + "\n" + quadTreeStr
-        writeToFile(content: final, fileName: "quadtree.txt")
+        writeToFile(content: final, fileName: quadtreeFileName, url : url)
     }
     
     // MARK: Create List Objects String
