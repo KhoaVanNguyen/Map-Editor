@@ -9,6 +9,8 @@
 import Foundation
 
 
+var isWriteFirstNode = false
+var nodeDetails = ""
 class Tree{
     
     var screen : Int
@@ -31,9 +33,10 @@ class Tree{
     // ex params: list Object  - leftTop node
     func Divide( node :  Node ){
         
+      
         // erase gameObject of node first
         
-        //node.listObject = [Tile]()
+        node.listObject = [Tile]()
         
         let nodeRect = NSRect(x: node.left, y: node.top - node.size, width: node.size, height: node.size)
         var i = globalTiles.count - 1;
@@ -41,16 +44,10 @@ class Tree{
             
           let tempRect = NSRect(x: globalTiles[i].x, y: globalTiles[i].y, width: globalTiles[i].width, height: globalTiles[i].height)
             
-                if ( nodeRect.intersects(tempRect) ){
+                if ( nodeRect.intersects(tempRect) && nodeRect.size.width < CGFloat(200) ){
                     
                 node.listObject.append(globalTiles[i])
-                                let tempStr = "\(globalTiles[i].width) "
-               // writeToFile(content: tempStr, fileName: quadTreeFile)
-                
-                    
-                let objectDetails = "\(globalTiles[i].id) "
-                 
-                quadTreeStr += objectDetails
+//                quadTreeStr += "\(globalTiles[i].id) "
                 globalTiles.remove(at: i)
 
             }
@@ -63,11 +60,13 @@ class Tree{
     
     
     func Build(node :  Node){
-        var nodeDetails = ""
-        nodeDetails  = GetNodeDetails(node: node)
-        quadTreeStr += nodeDetails
-        //writeToFile(content: nodeDetails, fileName: quadTreeFile)
-        if ( node.size < screen ){//|| node.listObject.count == 0  ){
+        
+        
+//        if (!isWriteFirstNode){
+//            nodeDetails  = GetNodeDetails(node: node)
+//            quadTreeStr += nodeDetails
+//        }
+        if ( node.size < screen || globalTiles.count == 0  ){
             return
         }
         else {
@@ -77,21 +76,21 @@ class Tree{
             node.rightTop =  Node(left: node.left + node.size / 2, top: node.top , size: node.size / 2, id: node.id * 8 + 2);
             node.leftBottom = Node(left: node.left, top: node.top / 2 , size: node.size / 2, id: node.id * 8 + 3);
             node.rightBottom = Node( left: node.left + node.size / 2, top: node.top / 2, size: node.size / 2, id: node.id * 8 + 4);
-           
-            nodeDetails = ""
-            nodeDetails += GetNodeDetails(node: node.leftTop!)
-            nodeDetails += GetNodeDetails(node: node.rightTop!)
-            nodeDetails += GetNodeDetails(node: node.leftBottom!)
-            nodeDetails += GetNodeDetails(node: node.rightBottom!)
-            
-            quadTreeStr += nodeDetails
-            
+//           
+//            nodeDetails = ""
+//            nodeDetails += GetNodeDetails(node: node.leftTop!)
+//            nodeDetails += GetNodeDetails(node: node.rightTop!)
+//            nodeDetails += GetNodeDetails(node: node.leftBottom!)
+//            nodeDetails += GetNodeDetails(node: node.rightBottom!)
+//            
+//            quadTreeStr += nodeDetails
+//            
             Divide(node: node.leftTop!)
             Divide( node: node.rightBottom!)
             Divide( node: node.leftBottom!)
             Divide( node: node.rightBottom!)
 
-            //node.listObject = [Tile]()
+            node.listObject = [Tile]()
 
             
             Build(node: node.leftTop!)
@@ -108,15 +107,16 @@ class Tree{
        
         if node != nil  {
   
-            tempStr += "\(node!.id) \(node!.left) \(node!.top) \(node!.size)" + "\n"
+            tempStr += "\(node!.id) \(node!.left) \(node!.top) \(node!.size) "
             // Game Object cua mot node
             if ( node?.listObject.count != 0 ){
             for i in 0..<Int((node?.listObject.count)!){
-                tempStr += " \(node!.listObject[i].id)"
+                tempStr += "\(node!.listObject[i].id)"
                 }
             }
             tempStr += "\n"
     
+            quadTreeStr += tempStr
             
           
          
@@ -135,7 +135,7 @@ class Tree{
   
     func GetNodeDetails( node : Node ) -> String{
         //        "id: " + _node.Id +  " left: " + _node.Left + " Top: " + _node.Top + " Size: " + _node.Size
-        var str = "\(node.id) \(node.left) \(node.top) \(node.size) \(node.size)"
+        var str = "\(node.id) \(node.left) \(node.top) \(node.size) "
         str += "\n"
         return str
     }

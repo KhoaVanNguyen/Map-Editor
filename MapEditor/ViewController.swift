@@ -101,10 +101,12 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             let col = index - (row * 48)
             print(" index = \(index) at: [\(row),\(col)] ")
             
+            
+            // Add to tile list
             let x = col * 32
             let y = row * 32
             let tile = Tile(url:  "\(currentTileID)", index: index, id: currentTileID, x: x, y: y, width: 32, height: 32)
-            listTiles.append(tile)
+            listTiles[index] = tile
            // changeCursorImge(index: "\(currentTileID)")
         }
         else{
@@ -220,9 +222,9 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     }
     @IBAction func saveBtn(_ sender: Any) {
         
-        let tree = Tree(left: 0, top: 1536, size: 1536, tiles: listTiles, screen: 250, bitmapHeight: 384)
+        let tree = Tree(left: 0, top: 1536, size: 1536, tiles: listTiles, screen: 200, bitmapHeight: 384)
         tree.Build(node: tree.treeNode!)
-        
+        tree.Save(node: tree.treeNode!)
         
         saveQuadTreeFile()
         
@@ -261,9 +263,12 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     // MARK: SAVE QUADTREE FILE
     
     func saveQuadTreeFile(){
+        
+        var final = ""
         createListObject()
-        quadTreeStr += listObjectStr + "\n"
-        writeToFile(content: quadTreeStr, fileName: "quadtree.txt")
+        
+        final += listObjectStr + "\n" + quadTreeStr
+        writeToFile(content: final, fileName: "quadtree.txt")
     }
     
     // MARK: Create List Objects String
@@ -273,15 +278,10 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         listObjectStr += "\(trackArray.count) \(1536) \(384)" + "\n"
         
         for i in 0..<listTiles.count{
-            listObjectStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].width) \(listTiles[i].height)" + "\n"
+            listObjectStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)" + "\n"
         }
         
     }
-    
-    
-    
-    
-    
     
 }
 

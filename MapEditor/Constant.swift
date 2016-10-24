@@ -160,7 +160,7 @@ func writeToFile(content: String, fileName: String) {
     else {
         //Create new file
         do {
-            try contentToAppend.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
+            try contentToAppend.write(toFile: filePath, atomically: true, encoding: String.Encoding.ascii)
         } catch {
             print("Error creating \(filePath)")
         }
