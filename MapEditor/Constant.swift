@@ -11,7 +11,8 @@ import Cocoa
 import AppKit
 
 
-
+var quadTreeName = ""
+var quadTreeUrl = ""
 var listObjectStr = ""
 var quadTreeStr  = ""
 var globalTiles = [Tile]()
@@ -149,7 +150,7 @@ func createSimpleOutputImage( arr : [Int]) -> CGImage{
 func writeToFile(content: String, fileName: String , url : String) {
     
     let contentToAppend = content+"\n"
-    let filePath = String(describing: url) + fileName
+    let filePath = String(describing: url)
     
     
 //    do {
