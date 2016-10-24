@@ -224,7 +224,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         
         let tree = Tree(left: 0, top: 1536, size: 1536, tiles: listTiles, screen: 200, bitmapHeight: 384)
         tree.Build(node: tree.treeNode!)
-        tree.Save(node: tree.treeNode!)
+       tree.Save(node: tree.treeNode! )
         
         saveQuadTreeFile()
         
