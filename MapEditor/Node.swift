@@ -17,10 +17,10 @@ class Node{
     var size : Int
     //var key: T?
    
-    var leftTop: Node!
-    var rightTop: Node!
-    var leftBottom: Node!
-    var rightBottom: Node!
+    var leftTop: Node?
+    var rightTop: Node?
+    var leftBottom: Node?
+    var rightBottom: Node?
     var listObject : [Tile]
     
     init() {

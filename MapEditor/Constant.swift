@@ -10,6 +10,13 @@ import Foundation
 import Cocoa
 import AppKit
 
+
+
+var listObjectStr = ""
+var quadTreeStr  = ""
+var globalTiles = [Tile]()
+
+
 func convertToStringFrom(_ indexPath : Set<IndexPath>) -> Int{
     var s =  String(describing: indexPath)
     s.characters.removeLast(2)
@@ -159,4 +166,7 @@ func writeToFile(content: String, fileName: String) {
         }
     }
 }
+
+
+
 

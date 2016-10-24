@@ -21,7 +21,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     var listTiles = [Tile]()
     var cursor = NSCursor()
-    let tileImages = [0,1,2,3,4,5,6,7,8,9,10,11,12,12,14,15,16,17,18,19,20,
+    let tileSet = [0,1,2,3,4,5,6,7,8,9,10,11,12,12,14,15,16,17,18,19,20,
                       21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,
                      40,41,42,43,44,45,46,47,48]
     var trackArray = [Int]()
@@ -53,6 +53,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     }
    
 
+    // MARK: NSCOLLECTION SETTINGS
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
         if collectionView == self.mapCollectionView{
             return 1
@@ -67,7 +68,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             return 480
         }
         else{
-            return tileImages.count
+            return tileSet.count
         }
     }
     
@@ -80,9 +81,9 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         }
         else {
             let item = collectionView.makeItem(withIdentifier: "TileCollectionViewItem", for: indexPath) as! TileCollectionViewItem
-           item.loadTile("\(tileImages[indexPath.item])")
+           item.loadTile("\(tileSet[indexPath.item])")
             
-            print("\(tileImages[indexPath.item])")
+            print("\(tileSet[indexPath.item])")
             return item
         }
     }
@@ -102,7 +103,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             
             let x = col * 32
             let y = row * 32
-            let tile = Tile(url:  "\(currentTileID)", index: index, id: index, x: x, y: y, width: 32, height: 32)
+            let tile = Tile(url:  "\(currentTileID)", index: index, id: currentTileID, x: x, y: y, width: 32, height: 32)
             listTiles.append(tile)
            // changeCursorImge(index: "\(currentTileID)")
         }
@@ -116,7 +117,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         }
     }
     
-    // Functions
+    // MARK: CONFIGURE COLLECTIONS
     private func configureMapCollectionView() {
         
         let flowLayout = NSCollectionViewFlowLayout()
@@ -146,18 +147,25 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         tileCollectionView.isSelectable = true
     }
     
+    // MARK: CONFIGURE COLLECTIONS
     func initTrackArray(){
         var i = 0
         while ( i <= 479){
             trackArray.append(0)
             
             
-            let tile = Tile(url: "-1", index: -1, id: 1, x: 0, y: 0, width: 0, height: 0)
+            let row = i / 48 // 48 == col
+            let col = i - (row * 48)
+            let x = col * 32
+            let y = row * 32
+            
+            let tile = Tile(url: "-1", index: i, id: -1, x: x, y: y, width: 32, height: 32)
             listTiles.append(tile)
             i += 1
         }
     }
  
+    // MARK: MOUSE
     override func mouseEntered(with event: NSEvent) {
      
             changeCursorImge(index: "\(currentTileID)")
@@ -176,14 +184,14 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
      
         
     }
-    
+    // MARK: BUTTONS
     @IBAction func exportImageBtn(_ sender: Any) {
         exportImage()
         
       
         
 
-        let cgImg = createSimpleOutputImage(arr: tileImages)
+        let cgImg = createSimpleOutputImage(arr: tileSet)
         
         
         
@@ -212,12 +220,14 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     }
     @IBAction func saveBtn(_ sender: Any) {
         
-        let tree = Tree(left: 0, top: 1536, size: 1536, tiles: listTiles, screen: 500, bitmapHeight: 384)
-        tree.Build(node: &tree.treeNode!)
-        tree.Save(node: tree.treeNode!)
+        let tree = Tree(left: 0, top: 1536, size: 1536, tiles: listTiles, screen: 250, bitmapHeight: 384)
+        tree.Build(node: tree.treeNode!)
+        
+        
+        saveQuadTreeFile()
         
         let file = "file.txt"
-       
+        
         var countRow = 1;
         
         let row = 10;
@@ -227,10 +237,10 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         outputText += "\(row) \(column)\n"
         for i in 0..<trackArray.count{
             if ( i == 47 * countRow ){
-              outputText += "\n"
+                outputText += "\n"
                 countRow += 1
             }
-              outputText += "\(trackArray[i]) "
+            outputText += "\(trackArray[i]) "
         }
         
         
@@ -244,9 +254,35 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             }
             catch {/* error handling here */}
             
-
+            
         }
     }
+
+    // MARK: SAVE QUADTREE FILE
+    
+    func saveQuadTreeFile(){
+        createListObject()
+        quadTreeStr += listObjectStr + "\n"
+        writeToFile(content: quadTreeStr, fileName: "quadtree.txt")
+    }
+    
+    // MARK: Create List Objects String
+    
+    func createListObject(){
+        listObjectStr += "\(tileSet.count)" + "\n"
+        listObjectStr += "\(trackArray.count) \(1536) \(384)" + "\n"
+        
+        for i in 0..<listTiles.count{
+            listObjectStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].width) \(listTiles[i].height)" + "\n"
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
 }
 
 

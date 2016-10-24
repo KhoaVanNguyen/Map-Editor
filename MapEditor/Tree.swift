@@ -8,7 +8,6 @@
 
 import Foundation
 
- var globalTiles = [Tile]()
 
 class Tree{
     
@@ -36,19 +35,22 @@ class Tree{
         
         //node.listObject = [Tile]()
         
-        let nodeRect = NSRect(x: node.left, y: node.top, width: node.size, height: node.size)
+        let nodeRect = NSRect(x: node.left, y: node.top - node.size, width: node.size, height: node.size)
         var i = globalTiles.count - 1;
         while ( i >= 0 ){
             
           let tempRect = NSRect(x: globalTiles[i].x, y: globalTiles[i].y, width: globalTiles[i].width, height: globalTiles[i].height)
             
-                if ( nodeRect.intersects(tempRect) == true ){
+                if ( nodeRect.intersects(tempRect) ){
                     
                 node.listObject.append(globalTiles[i])
                                 let tempStr = "\(globalTiles[i].width) "
-                writeToFile(content: tempStr, fileName: "tracequadtree.txt")
+               // writeToFile(content: tempStr, fileName: quadTreeFile)
+                
                     
-                    
+                let objectDetails = "\(globalTiles[i].id) "
+                 
+                quadTreeStr += objectDetails
                 globalTiles.remove(at: i)
 
             }
@@ -60,7 +62,11 @@ class Tree{
     
     
     
-    func Build(node : inout Node){
+    func Build(node :  Node){
+        var nodeDetails = ""
+        nodeDetails  = GetNodeDetails(node: node)
+        quadTreeStr += nodeDetails
+        //writeToFile(content: nodeDetails, fileName: quadTreeFile)
         if ( node.size < screen ){//|| node.listObject.count == 0  ){
             return
         }
@@ -72,18 +78,26 @@ class Tree{
             node.leftBottom = Node(left: node.left, top: node.top / 2 , size: node.size / 2, id: node.id * 8 + 3);
             node.rightBottom = Node( left: node.left + node.size / 2, top: node.top / 2, size: node.size / 2, id: node.id * 8 + 4);
            
-            Divide(node: node.leftTop)
-            Divide( node: node.rightBottom)
-            Divide( node: node.leftBottom)
-            Divide( node: node.rightBottom)
+            nodeDetails = ""
+            nodeDetails += GetNodeDetails(node: node.leftTop!)
+            nodeDetails += GetNodeDetails(node: node.rightTop!)
+            nodeDetails += GetNodeDetails(node: node.leftBottom!)
+            nodeDetails += GetNodeDetails(node: node.rightBottom!)
+            
+            quadTreeStr += nodeDetails
+            
+            Divide(node: node.leftTop!)
+            Divide( node: node.rightBottom!)
+            Divide( node: node.leftBottom!)
+            Divide( node: node.rightBottom!)
 
-          //  node.listObject = [Tile]()
+            //node.listObject = [Tile]()
 
             
-            Build(node: &node.leftTop!)
-            Build(node: &node.rightTop!)
-            Build(node: &node.leftBottom!)
-            Build(node: &node.rightBottom!)
+            Build(node: node.leftTop!)
+            Build(node: node.rightTop!)
+            Build(node: node.leftBottom!)
+            Build(node: node.rightBottom!)
         
         }
     }
@@ -94,17 +108,17 @@ class Tree{
        
         if node != nil  {
   
-            tempStr += "\(node!.id) \(node!.left) \( node!.top) \(node!.size)" + "\n"
+            tempStr += "\(node!.id) \(node!.left) \(node!.top) \(node!.size)" + "\n"
             // Game Object cua mot node
             if ( node?.listObject.count != 0 ){
             for i in 0..<Int((node?.listObject.count)!){
-                tempStr += " \(node!.listObject[i].index)"
+                tempStr += " \(node!.listObject[i].id)"
                 }
             }
-            
+            tempStr += "\n"
     
             
-            writeToFile(content: tempStr, fileName: "quadtree.txt")
+          
          
             // De Quy va Save lai
             Save( node: node?.leftTop );
@@ -119,4 +133,10 @@ class Tree{
         }
     }
   
+    func GetNodeDetails( node : Node ) -> String{
+        //        "id: " + _node.Id +  " left: " + _node.Left + " Top: " + _node.Top + " Size: " + _node.Size
+        var str = "\(node.id) \(node.left) \(node.top) \(node.size) \(node.size)"
+        str += "\n"
+        return str
+    }
 }
