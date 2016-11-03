@@ -82,7 +82,7 @@ class Tree{
             Divide( node: node.leftBottom!)
             Divide( node: node.rightBottom!)
 
-            //node.listObject = [Tile]()
+            node.listObject = [Tile]()
 
             Build(node: node.leftTop!)
             Build(node: node.rightTop!)

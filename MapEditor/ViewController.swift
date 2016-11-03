@@ -181,41 +181,26 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         cursor.set()
     }
     
-    
-    func exportImage(){
-     
-        
-    }
-    // MARK: BUTTONS
-    @IBAction func exportImageBtn(_ sender: Any) {
-        exportImage()
-        
-      
-        
-
+    func exportTileSet(){
         let cgImg = createSimpleOutputImage(arr: tileSet)
-        
-        
-        
-    
-//        let cgImgRef = image.cgImage(forProposedRect: nil, context: nil, hints: nil)
+        //let cgImgRef = image.cgImage(forProposedRect: nil, context: nil, hints: nil)
         let bmpImgRef = NSBitmapImageRep(cgImage: cgImg)
-        
-    
         let pngData = bmpImgRef.representation(using: .PNG, properties: [:])
-        
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            
-             let file = "image.png"
-            
+            let file = "tileset.png"
             let path = dir.appendingPathComponent(file)
             
             //writing
             do {
-               try  pngData?.write(to: path)
+                try  pngData?.write(to: path)
             }
             catch {/* error handling here */}
         }
+    }
+
+    // MARK: BUTTONS
+    @IBAction func exportImageBtn(_ sender: Any) {
+        exportTileSet()
     }
     @IBAction func saveBtn(_ sender: Any) {
         
