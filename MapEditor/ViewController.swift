@@ -274,15 +274,15 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             
             if result == NSFileHandlingPanelOKButton {
                 let savedUrl = savePanel.url
-                let fileName = savePanel.nameFieldStringValue
+                quadTreeName = savePanel.nameFieldStringValue
                 
-                let urlStr = savedUrl?.path
-                self.saveQuadTreeFile(quadtreeFileName: fileName, url: urlStr!)
+               quadTreeUrl = (savedUrl?.path)!
+                self.saveQuadTreeFile(quadtreeFileName: quadTreeName, url: quadTreeUrl)
                 
             }
         }
         
-        
+
         let file = "tilemap.txt"
         
         var countRow = 1;
