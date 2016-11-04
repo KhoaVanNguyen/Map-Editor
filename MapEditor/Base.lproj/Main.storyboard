@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11535.1" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11535.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -683,18 +683,18 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="MapEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1054" height="459"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1110" height="532"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VqP-5i-T2D">
-                                <rect key="frame" x="0.0" y="47" width="720" height="350"/>
+                                <rect key="frame" x="0.0" y="97" width="720" height="373"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" ambiguous="YES" id="lvg-Y9-zml">
-                                    <rect key="frame" x="1" y="1" width="703" height="333"/>
+                                    <rect key="frame" x="1" y="1" width="703" height="356"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZg-Q5-brd">
-                                            <rect key="frame" x="0.0" y="-47" width="1586" height="332"/>
+                                            <rect key="frame" x="0.0" y="-24" width="1586" height="332"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="wXz-4N-psQ">
                                                 <rect key="frame" x="1" y="1" width="1584" height="330"/>
@@ -703,9 +703,10 @@
                                                     <collectionView ambiguous="YES" selectable="YES" id="T4d-lO-thK">
                                                         <rect key="frame" x="0.0" y="0.0" width="1584" height="330"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" scrollDirection="horizontal" id="cSe-UM-f5h">
-                                                            <size key="itemSize" width="32" height="32"/>
-                                                        </collectionViewFlowLayout>
+                                                        <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfRows="20" maximumNumberOfColumns="100" id="ZRu-9q-LMy">
+                                                            <size key="minimumItemSize" width="32" height="32"/>
+                                                            <size key="maximumItemSize" width="32" height="32"/>
+                                                        </collectionViewGridLayout>
                                                         <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </collectionView>
                                                 </subviews>
@@ -724,16 +725,16 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="aHJ-1J-GL5">
-                                    <rect key="frame" x="1" y="334" width="703" height="15"/>
+                                    <rect key="frame" x="1" y="357" width="703" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Zwz-gi-fep">
-                                    <rect key="frame" x="704" y="1" width="15" height="333"/>
+                                    <rect key="frame" x="704" y="1" width="15" height="356"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Obz-af-cns">
-                                <rect key="frame" x="760" y="47" width="279" height="350"/>
+                                <rect key="frame" x="759" y="97" width="279" height="350"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="aJr-I1-ta5">
                                     <rect key="frame" x="1" y="1" width="277" height="348"/>
@@ -759,19 +760,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iA9-Vi-hkL">
-                                <rect key="frame" x="20" y="405" width="84" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" title="Save" bezelStyle="shadowlessSquare" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="Frp-Rs-bLL">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="saveBtn:" target="XfG-lQ-9wD" id="5Lq-AN-181"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yex-aE-q9y">
-                                <rect key="frame" x="760" y="410" width="117" height="29"/>
+                            <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yex-aE-q9y">
+                                <rect key="frame" x="759" y="478" width="117" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="square" title="Export TileSet" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="V7z-fO-uup">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -781,16 +771,125 @@
                                     <action selector="exportImageBtn:" target="XfG-lQ-9wD" id="rUw-Fu-qy3"/>
                                 </connections>
                             </button>
+                            <segmentedControl wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yCf-rK-VZA">
+                                <rect key="frame" x="760" y="447" width="279" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="capsule" trackingMode="selectOne" id="Jzj-6O-YTR">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment label="Background" toolTip="test" image="48" imageScaling="none" width="136"/>
+                                        <segment label="GameObject" width="136" selected="YES" tag="1"/>
+                                    </segments>
+                                </segmentedCell>
+                            </segmentedControl>
+                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gxh-fi-bX2">
+                                <rect key="frame" x="268" y="50" width="19" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="100" doubleValue="1" valueWraps="YES" id="HYi-Av-4RN">
+                                    <connections>
+                                        <action selector="rowStepper:" target="XfG-lQ-9wD" id="Ugt-mU-D3Y"/>
+                                    </connections>
+                                </stepperCell>
+                            </stepper>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="quQ-ZK-mMB">
+                                <rect key="frame" x="2" y="-1" width="72" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="6" id="YnN-Go-j0M"/>
+                            </imageView>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rMz-3v-EFL">
+                                <rect key="frame" x="193" y="50" width="63" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="10" drawsBackground="YES" id="8Uh-yf-w1M">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="rowTextChange:" target="XfG-lQ-9wD" id="awQ-nI-CLk"/>
+                                </connections>
+                            </textField>
+                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S5d-LU-SFI">
+                                <rect key="frame" x="268" y="2" width="19" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="100" doubleValue="1" valueWraps="YES" id="eTw-4f-41f"/>
+                                <connections>
+                                    <action selector="columnStepper:" target="XfG-lQ-9wD" id="coA-PK-CNn"/>
+                                </connections>
+                            </stepper>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kXu-an-QuY">
+                                <rect key="frame" x="193" y="5" width="63" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="48" drawsBackground="YES" id="Nb5-jv-CBH">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="columnTextChange:" target="XfG-lQ-9wD" id="Gpb-lD-k94"/>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQD-LK-2qQ">
+                                <rect key="frame" x="119" y="55" width="53" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Rows:" id="VxQ-dv-Sx9">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UND-x0-nCw">
+                                <rect key="frame" x="119" y="10" width="73" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Columns:" placeholderString="Columns:" id="V0f-M4-B7K">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7P8-DJ-jIb">
+                                <rect key="frame" x="6" y="72" width="72" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Current tile" id="xhG-Kj-zRa">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iA9-Vi-hkL">
+                                <rect key="frame" x="20" y="482" width="84" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" title="Save" bezelStyle="shadowlessSquare" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="Frp-Rs-bLL">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="saveBtn:" target="XfG-lQ-9wD" id="5Lq-AN-181"/>
+                                </connections>
+                            </button>
                         </subviews>
+                        <backgroundFilters>
+                            <ciFilter name="CIGaussianBlur">
+                                <configuration>
+                                    <null key="inputImage"/>
+                                    <real key="inputRadius" value="10"/>
+                                </configuration>
+                            </ciFilter>
+                        </backgroundFilters>
                     </view>
                     <connections>
+                        <outlet property="columnLbl" destination="kXu-an-QuY" id="11x-Cq-2Y8"/>
                         <outlet property="mapCollectionView" destination="T4d-lO-thK" id="744-du-h2y"/>
+                        <outlet property="rowLbl" destination="rMz-3v-EFL" id="VxO-C5-5BL"/>
                         <outlet property="tileCollectionView" destination="Vq6-Hr-HFP" id="8yU-HI-0Fh"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="360" y="686.5"/>
+            <point key="canvasLocation" x="103" y="921"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="48" width="24" height="24"/>
+        <image name="6" width="24" height="24"/>
+    </resources>
 </document>

@@ -17,6 +17,14 @@ var quadTreeStr  = ""
 var globalTiles = [Tile]()
 
 
+var ROWS = 10
+var COLUMNS = 48
+
+
+var SCREEN_WIDTH = ROWS * 32
+var SCREEN_HEIGHT =  COLUMNS * 32
+var TILE_SIZE = 32
+
 func convertToStringFrom(_ indexPath : Set<IndexPath>) -> Int{
     var s =  String(describing: indexPath)
     s.characters.removeLast(2)

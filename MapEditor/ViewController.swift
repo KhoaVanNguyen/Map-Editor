@@ -9,8 +9,10 @@
 import Cocoa
 import ImageIO
 import AppKit
-class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectionViewDelegate{
+class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout{
     
+    @IBOutlet weak var columnLbl: NSTextField!
+    @IBOutlet weak var rowLbl: NSTextField!
     @IBOutlet weak var mapCollectionView: NSCollectionView!
     
     @IBOutlet weak var tileCollectionView: NSCollectionView!
@@ -24,16 +26,27 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     let tileSet = [0,1,2,3,4,5,6,7,8,9,10,11,12,12,14,15,16,17,18,19,20,
                       21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,
                      40,41,42,43,44,45,46,47,48]
+    
+    let gameSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",
+                   "game_7","game_8","game_9","game_10","game_11","game_12",
+                   "game_13","game_14","game_15","game_16","game_17","game_18",
+                   "game_19","game_20","game_21","game_22","game_23","game_24",
+                   "game_25","game_26","game_27",]
+    
     var trackArray = [Int]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureMapCollectionView()
+        
+        
+        
+        
+        configureMapCollectionView(rows: 5, columns: 10)
         configureTileCollectionView()
         
         initTrackArray()
         
-        
+        self.view.layer?.backgroundColor = CGColor(red: 24, green: 122, blue: 12, alpha: 1)
         
         mapCollectionView.delegate = self
         mapCollectionView.dataSource = self
@@ -72,6 +85,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         }
     }
     
+
 
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
        
@@ -120,19 +134,38 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     }
     
     // MARK: CONFIGURE COLLECTIONS
-    private func configureMapCollectionView() {
+    private func configureMapCollectionView(rows: Int, columns : Int) {
         
-        let flowLayout = NSCollectionViewFlowLayout()
-        flowLayout.itemSize = NSSize(width: 32.0, height: 32.0)
-        // flowLayout.sectionInset = EdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
-        flowLayout.minimumInteritemSpacing = 1
-        flowLayout.minimumLineSpacing = 1
-        mapCollectionView.collectionViewLayout = flowLayout
+//        let flowLayout = NSCollectionViewFlowLayout()
+//        flowLayout.itemSize = NSSize(width: 32.0, height: 32.0)
+//        // flowLayout.sectionInset = EdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
+//        flowLayout.minimumInteritemSpacing = 1
+//        flowLayout.minimumLineSpacing = 1
+//        
+//        mapCollectionView.setFrameSize(NSSize(width: rows*32, height: columns*32))
+//        mapCollectionView.collectionViewLayout = flowLayout
+//        
+//        view.wantsLayer = true
+//        
+//        mapCollectionView.isSelectable = true
+        
+        let gridLayout = NSCollectionViewGridLayout()
+        gridLayout.minimumItemSize = CGSize(width: TILE_SIZE, height: TILE_SIZE)
+        
+        gridLayout.maximumItemSize = CGSize(width: TILE_SIZE, height: TILE_SIZE)
+        
+        gridLayout.maximumNumberOfRows = rows
+        gridLayout.maximumNumberOfColumns = columns
+        
+        gridLayout.minimumInteritemSpacing = 1
+        gridLayout.minimumLineSpacing = 1
+        
+        
+        mapCollectionView.collectionViewLayout = gridLayout
         
         view.wantsLayer = true
-        
-        mapCollectionView.layer?.backgroundColor = NSColor.black.cgColor
         mapCollectionView.isSelectable = true
+
     }
     private func configureTileCollectionView() {
         
@@ -197,8 +230,30 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             catch {/* error handling here */}
         }
     }
+    // MARK: SAVE QUADTREE FILE
+    
+    func saveQuadTreeFile(quadtreeFileName : String, url : String ){
+        
+        var final = ""
+        createListObject()
+        
+        final += listObjectStr + "\n" + quadTreeStr
+        writeToFile(content: final, fileName: quadtreeFileName, url : url)
+    }
+    
+    // MARK: Create List Objects String
+    
+    func createListObject(){
+        listObjectStr += "\(tileSet.count)" + "\n"
+        listObjectStr += "\(trackArray.count) \(1536) \(384)" + "\n"
+        
+        for i in 0..<listTiles.count{
+            listObjectStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)" + "\n"
+        }
+        
+    }
 
-    // MARK: BUTTONS
+    // MARK: Control Interactions
     @IBAction func exportImageBtn(_ sender: Any) {
         exportTileSet()
     }
@@ -260,29 +315,30 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         }
     }
 
-    // MARK: SAVE QUADTREE FILE
+    @IBAction func rowStepper(_ sender: NSStepper) {
     
-    func saveQuadTreeFile(quadtreeFileName : String, url : String ){
-        
-        var final = ""
-        createListObject()
-        
-        final += listObjectStr + "\n" + quadTreeStr
-        writeToFile(content: final, fileName: quadtreeFileName, url : url)
-    }
-    
-    // MARK: Create List Objects String
-    
-    func createListObject(){
-        listObjectStr += "\(tileSet.count)" + "\n"
-        listObjectStr += "\(trackArray.count) \(1536) \(384)" + "\n"
-        
-        for i in 0..<listTiles.count{
-            listObjectStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)" + "\n"
-        }
+        rowLbl.stringValue = "\( sender.valueWraps )"
         
     }
     
+    @IBAction func columnStepper(_ sender: NSStepper) {
+    }
+ 
+    @IBAction func rowTextChange(_ sender: NSTextField) {
+        
+        ROWS = Int(rowLbl.stringValue)!
+        self.configureMapCollectionView(rows: ROWS, columns: COLUMNS)
+        mapCollectionView.reloadData()
+    }
+    
+    @IBAction func columnTextChange(_ sender: Any) {
+        
+        COLUMNS = Int(columnLbl.stringValue)!
+        
+        self.configureMapCollectionView(rows: ROWS, columns: COLUMNS)
+        mapCollectionView.reloadData()
+        
+    }
 }
 
 
