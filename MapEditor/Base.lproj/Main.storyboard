@@ -703,7 +703,7 @@
                                                     <collectionView ambiguous="YES" selectable="YES" id="T4d-lO-thK">
                                                         <rect key="frame" x="0.0" y="0.0" width="1584" height="330"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfRows="20" maximumNumberOfColumns="100" id="ZRu-9q-LMy">
+                                                        <collectionViewGridLayout key="collectionViewLayout" id="ZRu-9q-LMy">
                                                             <size key="minimumItemSize" width="32" height="32"/>
                                                             <size key="maximumItemSize" width="32" height="32"/>
                                                         </collectionViewGridLayout>
