@@ -46,7 +46,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     var trackGameObject = [Int]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureMapCollectionView(rows: 5, columns: 10)
+        configureMapCollectionView(rows: 10, columns: 48)
         configureTileCollectionView(collectionView: tileCollectionView)
         configureTileCollectionView(collectionView: objectCollectionView)
         initTrackBackground()
@@ -130,19 +130,23 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             //item.changeImage("\(currentTileID)")
             
             item.changeImage(pickingImg)
-            // track 
             
-            trackBackground[index] = currentTileID
             let row = index / 48 // 48 == col
             let col = index - (row * 48)
             print(" index = \(index) at: [\(row),\(col)] ")
-            
-            
             // Add to tile list
             let x = col * 32
             let y = row * 32
-            let tile = Tile(url:  "\(currentTileID)", index: index, id: currentTileID, x: x, y: y, width: 32, height: 32)
-            listTiles[index] = tile
+            // track
+            if ( isDrawBG ){
+                trackBackground[index] = currentTileID
+                
+                let tile = Tile(url:  "\(currentTileID)", index: index, id:currentTileID, x: x, y: y, width: 32, height: 32)
+                listTiles[index] = tile
+            }else {
+                let tile = Tile(url:  "\(currentTileID)", index: listGameObject.count, id:currentTileID, x: x, y: y, width: 32, height: 32)
+                listGameObject.append(tile)
+            }
            // changeCursorImge(index: "\(currentTileID)")
         }
         else if collectionView == self.objectCollectionView  {
@@ -162,7 +166,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             isDrawBG = true
             let index = convertToStringFrom(indexPaths)
             currentTileID = index
-            
+            pickingImg = "\(index)"
             
             
             changeCursorImge(index: "\(index)")
@@ -309,6 +313,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         tree.Build(node: tree.treeNode!)
         tree.Save(node: tree.treeNode! )
         
+        
         let savePanel = NSSavePanel()
         savePanel.setAccessibilityExpanded(true)
         savePanel.canCreateDirectories = true
@@ -408,6 +413,49 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         }
         print("Segment is selected: \(sender.selectedSegment)")
     }
+    @IBAction func saveObjects(_ sender: Any) {
+        
+        
+        var gameObjectStr : String = ""
+        gameObjectStr += "\(listGameObject.count) \(1536) \(384)" + "\n"
+        
+        for i in 0..<listGameObject.count{
+            gameObjectStr += "\(listGameObject[i].index) \(listGameObject[i].id) \(listGameObject[i].x) \(listGameObject[i].y) \(listGameObject[i].x) \(listGameObject[i].y)" + "\n"
+        }
+        
+        
+        quadTreeStr = ""
+        let gameObjectTree = Tree(left: 0, top: 1536, size: 1536, tiles: listGameObject, screen: 200, bitmapHeight: 384)
+        
+        gameObjectTree.Build(node: gameObjectTree.treeNode!)
+        gameObjectTree.Save(node: gameObjectTree.treeNode!)
+        
+        
+        var finalStr = ""
+        finalStr += gameObjectStr  + "\n" + quadTreeStr
+        
+        let savePanel = NSSavePanel()
+        savePanel.setAccessibilityExpanded(true)
+        savePanel.canCreateDirectories = true
+        savePanel.title = "Save QuadTree Game Object"
+        savePanel.allowedFileTypes = ["txt","docx"]
+        savePanel.begin { (result) in
+            
+            if result == NSFileHandlingPanelOKButton {
+                let savedUrl = savePanel.url
+                quadTreeName = savePanel.nameFieldStringValue
+                
+                quadTreeUrl = (savedUrl?.path)!
+                // self.saveQuadTreeFile(quadtreeFileName: quadTreeName, url: quadTreeUrl)
+                
+               
+                writeToFile(content: finalStr, fileName: quadTreeName, url : quadTreeUrl)
+                
+            }
+        }
+    }
+
+
 }
 
 

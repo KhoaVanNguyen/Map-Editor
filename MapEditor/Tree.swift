@@ -61,13 +61,13 @@ class Tree{
     func Build(node :  Node){
         
         
-        if (!isWriteFirstNode){
-            nodeDetails  = GetNodeDetails(node: node)
-            quadTreeStr += nodeDetails + "\n"
-            
-            isWriteFirstNode = true
-            nodeDetails = ""
-        }
+//        if (!isWriteFirstNode){
+//            nodeDetails  = GetNodeDetails(node: node)
+//            quadTreeStr += nodeDetails + "\n"
+//            
+//            isWriteFirstNode = true
+//            nodeDetails = ""
+//        }
         if ( node.size < screen || globalTiles.count == 0  ){
             return
         }
@@ -83,12 +83,8 @@ class Tree{
             Divide( node: node.rightTop!)
             Divide( node: node.leftBottom!)
             Divide( node: node.rightBottom!)
-
-            node.listObject = [Tile]()
-
-
             
-            //node.listObject = [Tile]()
+            node.listObject = [Tile]()
 
             Build(node: node.leftTop!)
             Build(node: node.rightTop!)

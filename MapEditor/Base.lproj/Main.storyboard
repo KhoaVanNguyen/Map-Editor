@@ -896,6 +896,17 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kxj-iM-TUP">
+                                <rect key="frame" x="121" y="482" width="119" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" title="Save GameObject" bezelStyle="shadowlessSquare" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="S9l-uz-24s">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="saveObjects:" target="XfG-lQ-9wD" id="KHn-tE-pxV"/>
+                                    </connections>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <backgroundFilters>
                             <ciFilter name="CIGaussianBlur">
