@@ -713,11 +713,11 @@
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             </clipView>
                                             <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="5DY-tK-xpi">
-                                                <rect key="frame" x="1" y="405" width="718" height="16"/>
+                                                <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="YVq-MZ-iKC">
-                                                <rect key="frame" x="703" y="1" width="16" height="378"/>
+                                                <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
@@ -752,11 +752,11 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="bPi-tN-FDa">
-                                    <rect key="frame" x="1" y="144" width="233" height="15"/>
+                                    <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Mih-Q4-zDP">
-                                    <rect key="frame" x="234" y="1" width="15" height="143"/>
+                                    <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -777,9 +777,12 @@
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="capsule" trackingMode="selectOne" id="Jzj-6O-YTR">
                                     <font key="font" metaFont="system"/>
                                     <segments>
-                                        <segment label="Background" toolTip="test" image="48" imageScaling="none" width="136"/>
-                                        <segment label="GameObject" width="136" selected="YES" tag="1"/>
+                                        <segment label="Background" toolTip="test" image="48" imageScaling="none" width="136" selected="YES"/>
+                                        <segment label="GameObject" image="game_27" width="136" tag="1"/>
                                     </segments>
+                                    <connections>
+                                        <action selector="segmentCellchange:" target="XfG-lQ-9wD" id="Mcw-nK-wRd"/>
+                                    </connections>
                                 </segmentedCell>
                             </segmentedControl>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gxh-fi-bX2">
@@ -799,7 +802,7 @@
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rMz-3v-EFL">
                                 <rect key="frame" x="193" y="50" width="63" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="10" drawsBackground="YES" id="8Uh-yf-w1M">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="10" placeholderString="10" drawsBackground="YES" id="8Uh-yf-w1M">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -819,7 +822,7 @@
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kXu-an-QuY">
                                 <rect key="frame" x="193" y="5" width="63" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="48" drawsBackground="YES" id="Nb5-jv-CBH">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="48" placeholderString="48" drawsBackground="YES" id="Nb5-jv-CBH">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -866,6 +869,33 @@
                                     <action selector="saveBtn:" target="XfG-lQ-9wD" id="5Lq-AN-181"/>
                                 </connections>
                             </button>
+                            <scrollView hidden="YES" wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81P-2f-V3u">
+                                <rect key="frame" x="759" y="97" width="279" height="350"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="ZZR-OA-vzW">
+                                    <rect key="frame" x="1" y="1" width="277" height="348"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <collectionView ambiguous="YES" id="h3r-T0-gzY">
+                                            <rect key="frame" x="0.0" y="0.0" width="277" height="348"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="qNz-A1-q3B">
+                                                <size key="itemSize" width="50" height="50"/>
+                                            </collectionViewFlowLayout>
+                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </collectionView>
+                                    </subviews>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="b4p-tn-dTq">
+                                    <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="JwF-cT-ict">
+                                    <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
                         </subviews>
                         <backgroundFilters>
                             <ciFilter name="CIGaussianBlur">
@@ -877,8 +907,11 @@
                         </backgroundFilters>
                     </view>
                     <connections>
+                        <outlet property="backgroundScrollView" destination="Obz-af-cns" id="poB-hY-0cT"/>
                         <outlet property="columnLbl" destination="kXu-an-QuY" id="11x-Cq-2Y8"/>
+                        <outlet property="gameObjectSrollView" destination="81P-2f-V3u" id="i0X-1I-OXb"/>
                         <outlet property="mapCollectionView" destination="T4d-lO-thK" id="744-du-h2y"/>
+                        <outlet property="objectCollectionView" destination="h3r-T0-gzY" id="Dtv-G6-0Q2"/>
                         <outlet property="rowLbl" destination="rMz-3v-EFL" id="VxO-C5-5BL"/>
                         <outlet property="tileCollectionView" destination="Vq6-Hr-HFP" id="8yU-HI-0Fh"/>
                     </connections>
@@ -891,5 +924,6 @@
     <resources>
         <image name="48" width="24" height="24"/>
         <image name="6" width="24" height="24"/>
+        <image name="game_27" width="41" height="35"/>
     </resources>
 </document>

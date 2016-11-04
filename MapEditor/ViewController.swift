@@ -10,41 +10,46 @@ import Cocoa
 import ImageIO
 import AppKit
 class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout{
+    @IBOutlet weak var backgroundScrollView: NSScrollView!
     
+    @IBOutlet weak var gameObjectSrollView: NSScrollView!
+    @IBOutlet weak var objectCollectionView: NSCollectionView!
     @IBOutlet weak var columnLbl: NSTextField!
     @IBOutlet weak var rowLbl: NSTextField!
     @IBOutlet weak var mapCollectionView: NSCollectionView!
     
     @IBOutlet weak var tileCollectionView: NSCollectionView!
    
+    
+    var isDrawBG = true
+    
     var currentTileID = 0;
 
+    var pickingImg = "black"
     var exportedImage = NSImage()
     
     var listTiles = [Tile]()
+    var listGameObject = [Tile]()
+    
     var cursor = NSCursor()
+    
+    
     let tileSet = [0,1,2,3,4,5,6,7,8,9,10,11,12,12,14,15,16,17,18,19,20,
-                      21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,
-                     40,41,42,43,44,45,46,47,48]
+                   21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,
+                   40,41,42,43,44,45,46,47,48]
     
-    let gameSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",
-                   "game_7","game_8","game_9","game_10","game_11","game_12",
-                   "game_13","game_14","game_15","game_16","game_17","game_18",
-                   "game_19","game_20","game_21","game_22","game_23","game_24",
-                   "game_25","game_26","game_27",]
+    let gameSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",                   "game_7","game_8","game_9","game_10","game_11","game_12",                   "game_13","game_14","game_15","game_16","game_17","game_18",
+        "game_19","game_20","game_21","game_22","game_23","game_24",
+        "game_25","game_26","game_27"]
     
-    var trackArray = [Int]()
+    var trackBackground = [Int]()
+    var trackGameObject = [Int]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
-        
-        
         configureMapCollectionView(rows: 5, columns: 10)
-        configureTileCollectionView()
-        
-        initTrackArray()
+        configureTileCollectionView(collectionView: tileCollectionView)
+        configureTileCollectionView(collectionView: objectCollectionView)
+        initTrackBackground()
         
         self.view.layer?.backgroundColor = CGColor(red: 24, green: 122, blue: 12, alpha: 1)
         
@@ -54,9 +59,13 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         tileCollectionView.delegate = self
         tileCollectionView.dataSource = self
         
-        changeCursorImge(index: "\(currentTileID)")
-       
-        // Do any additional setup after loading the view.
+        objectCollectionView.delegate = self
+        objectCollectionView.dataSource = self
+        
+        changeCursorImge(index: pickingImg)
+        
+
+        
     }
 
     override var representedObject: Any? {
@@ -70,6 +79,8 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
         if collectionView == self.mapCollectionView{
             return 1
+        }else if collectionView == self.objectCollectionView  {
+            return 1
         }
         else{
             return 1
@@ -79,6 +90,9 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.mapCollectionView{
             return 480
+        }
+        else if collectionView == self.objectCollectionView  {
+            return gameSet.count
         }
         else{
             return tileSet.count
@@ -93,6 +107,13 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         let item = collectionView.makeItem(withIdentifier: "CollectionViewItem", for: indexPath) as! CollectionViewItem
         return item
         }
+        else if collectionView == self.objectCollectionView  {
+            let item = collectionView.makeItem(withIdentifier: "GameObjectViewItem", for: indexPath) as!
+            GameObjectViewItem
+            item.loadImage(imgUrl: gameSet[indexPath.item])
+            return item
+        }
+            
         else {
             let item = collectionView.makeItem(withIdentifier: "TileCollectionViewItem", for: indexPath) as! TileCollectionViewItem
            item.loadTile("\(tileSet[indexPath.item])")
@@ -106,11 +127,12 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         if collectionView == self.mapCollectionView{
             let index = convertToStringFrom(indexPaths)
             let item = collectionView.item(at: index) as! CollectionViewItem
-            item.changeImage("\(currentTileID)")
+            //item.changeImage("\(currentTileID)")
             
+            item.changeImage(pickingImg)
             // track 
             
-            trackArray[index] = currentTileID
+            trackBackground[index] = currentTileID
             let row = index / 48 // 48 == col
             let col = index - (row * 48)
             print(" index = \(index) at: [\(row),\(col)] ")
@@ -123,10 +145,25 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             listTiles[index] = tile
            // changeCursorImge(index: "\(currentTileID)")
         }
-        else{
+        else if collectionView == self.objectCollectionView  {
+            isDrawBG = false
+
+            let index = convertToStringFrom(indexPaths)
             
+            currentTileID = index
+            
+            // get the name of current tile
+            pickingImg = gameSet[currentTileID]
+            
+            changeCursorImge(index: "\(gameSet[index])")
+        }
+            
+        else{
+            isDrawBG = true
             let index = convertToStringFrom(indexPaths)
             currentTileID = index
+            
+            
             
             changeCursorImge(index: "\(index)")
            
@@ -135,20 +172,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     // MARK: CONFIGURE COLLECTIONS
     private func configureMapCollectionView(rows: Int, columns : Int) {
-        
-//        let flowLayout = NSCollectionViewFlowLayout()
-//        flowLayout.itemSize = NSSize(width: 32.0, height: 32.0)
-//        // flowLayout.sectionInset = EdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
-//        flowLayout.minimumInteritemSpacing = 1
-//        flowLayout.minimumLineSpacing = 1
-//        
-//        mapCollectionView.setFrameSize(NSSize(width: rows*32, height: columns*32))
-//        mapCollectionView.collectionViewLayout = flowLayout
-//        
-//        view.wantsLayer = true
-//        
-//        mapCollectionView.isSelectable = true
-        
+
         let gridLayout = NSCollectionViewGridLayout()
         gridLayout.minimumItemSize = CGSize(width: TILE_SIZE, height: TILE_SIZE)
         
@@ -167,26 +191,30 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         mapCollectionView.isSelectable = true
 
     }
-    private func configureTileCollectionView() {
+    private func configureTileCollectionView( collectionView : NSCollectionView  ) {
         
         let flowLayout = NSCollectionViewFlowLayout()
         flowLayout.itemSize = NSSize(width: 32.0, height: 32.0)
         // flowLayout.sectionInset = EdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
         flowLayout.minimumInteritemSpacing = 1
         flowLayout.minimumLineSpacing = 1
-        mapCollectionView.collectionViewLayout = flowLayout
+        //mapCollectionView.collectionViewLayout = flowLayout
         
+        
+        collectionView.collectionViewLayout = flowLayout
         view.wantsLayer = true
         
-        tileCollectionView.layer?.backgroundColor = NSColor.black.cgColor
-        tileCollectionView.isSelectable = true
+       // tileCollectionView.layer?.backgroundColor = NSColor.black.cgColor
+        //tileCollectionView.isSelectable = true
+        collectionView.isSelectable = true
+        
     }
     
-    // MARK: CONFIGURE COLLECTIONS
-    func initTrackArray(){
+    // MARK: CONFIGURE TRACKING ARRAYS
+    func initTrackBackground(){
         var i = 0
         while ( i <= 479){
-            trackArray.append(0)
+            trackBackground.append(0)
             
             
             let row = i / 48 // 48 == col
@@ -198,6 +226,22 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             listTiles.append(tile)
             i += 1
         }
+    }
+    func initTrackObjects(){
+        var i = 0
+        while ( i <= gameSet.count){
+            trackGameObject.append(0)
+            // HARD CODE COLUMN AND ROW , SIZE
+            let row = i / 48 // 48 == col
+            let col = i - (row * 48)
+            let x = col * 32
+            let y = row * 32
+            
+            let tile = Tile(url: "-1", index: i, id: -1, x: x, y: y, width: 32, height: 32)
+            listTiles.append(tile)
+            i += 1
+        }
+
     }
  
     // MARK: MOUSE
@@ -245,7 +289,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     func createListObject(){
         listObjectStr += "\(tileSet.count)" + "\n"
-        listObjectStr += "\(trackArray.count) \(1536) \(384)" + "\n"
+        listObjectStr += "\(trackBackground.count) \(1536) \(384)" + "\n"
         
         for i in 0..<listTiles.count{
             listObjectStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)" + "\n"
@@ -292,12 +336,12 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         
         var outputText = ""
         outputText += "\(row) \(column)\n"
-        for i in 0..<trackArray.count{
+        for i in 0..<trackBackground.count{
             if ( i == 47 * countRow ){
                 outputText += "\n"
                 countRow += 1
             }
-            outputText += "\(trackArray[i]) "
+            outputText += "\(trackBackground[i]) "
         }
         
         
@@ -338,6 +382,31 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         self.configureMapCollectionView(rows: ROWS, columns: COLUMNS)
         mapCollectionView.reloadData()
         
+    }
+    @IBAction func segmentCellchange(_ sender: NSSegmentedCell) {
+        
+        // game
+        if ( sender.selectedSegment == 1 ){
+            backgroundScrollView.isHidden = true
+            backgroundScrollView.setAccessibilityEnabled(false)
+            tileCollectionView.isSelectable = false
+            
+            gameObjectSrollView.isHidden = false
+            gameObjectSrollView.setAccessibilityEnabled(true)
+            objectCollectionView.isSelectable = true
+         
+        }else if ( sender.selectedSegment == 0 ){
+            backgroundScrollView.isHidden = false
+            backgroundScrollView.setAccessibilityEnabled(true)
+            tileCollectionView.isSelectable = true
+            
+            gameObjectSrollView.isHidden = true
+            gameObjectSrollView.setAccessibilityEnabled(false)
+            objectCollectionView.isSelectable = false
+            
+           
+        }
+        print("Segment is selected: \(sender.selectedSegment)")
     }
 }
 

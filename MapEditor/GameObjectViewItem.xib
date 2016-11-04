@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="GameObjectViewItem" customModule="MapEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="gameObjectImage" destination="fAe-0m-vjE" id="50F-7V-qsv"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fAe-0m-vjE">
+                    <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="game_7" id="xw5-0f-AYw"/>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="fAe-0m-vjE" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="crj-Py-1VQ"/>
+                <constraint firstAttribute="bottom" secondItem="fAe-0m-vjE" secondAttribute="bottom" id="dm4-8F-WFS"/>
+                <constraint firstAttribute="trailing" secondItem="fAe-0m-vjE" secondAttribute="trailing" id="ewZ-yu-CYk"/>
+                <constraint firstItem="fAe-0m-vjE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="g9W-m0-vJ7"/>
+            </constraints>
+        </customView>
+        <collectionViewItem id="K2b-ki-5jL" customClass="GameObjectViewItem" customModule="MapEditor" customModuleProvider="target"/>
+    </objects>
+    <resources>
+        <image name="game_7" width="20" height="20"/>
+    </resources>
+</document>

@@ -83,15 +83,13 @@ class Tree{
             Divide( node: node.rightTop!)
             Divide( node: node.leftBottom!)
             Divide( node: node.rightBottom!)
-<<<<<<< HEAD
 
             node.listObject = [Tile]()
 
-=======
+
             
             //node.listObject = [Tile]()
-            
->>>>>>> c9ceebfa8ac0ce1f173d9e39d56c8cec9ec843a0
+
             Build(node: node.leftTop!)
             Build(node: node.rightTop!)
             Build(node: node.leftBottom!)

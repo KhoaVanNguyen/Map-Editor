@@ -158,11 +158,7 @@ func createSimpleOutputImage( arr : [Int]) -> CGImage{
 func writeToFile(content: String, fileName: String , url : String) {
     
     let contentToAppend = content+"\n"
-<<<<<<< HEAD
-    let filePath = String(describing: url) 
-=======
     let filePath = String(describing: url)
->>>>>>> c9ceebfa8ac0ce1f173d9e39d56c8cec9ec843a0
     
     
 //    do {
