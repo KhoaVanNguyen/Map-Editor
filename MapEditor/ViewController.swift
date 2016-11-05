@@ -24,6 +24,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
    
     
     var isDrawBG = true
+    var isErase = false
     
     var currentTileID = 0;
 
@@ -32,6 +33,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     var listTiles = [Tile]()
     var listGameObject = [Tile]()
+    var trackForDelete = [Track]()
     
     var cursor = NSCursor()
     
@@ -40,9 +42,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
                    21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,
                    40,41,42,43,44,45,46,47,48]
     
-    let gameSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",                   "game_7","game_8","game_9","game_10","game_11","game_12",                   "game_13","game_14","game_15","game_16","game_17","game_18",
-        "game_19","game_20","game_21","game_22","game_23","game_24",
-        "game_25","game_26","game_27"]
+    let gameSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",                   "game_7","game_8","game_9","game_10","game_11","game_12",                   "game_13","game_14","game_15","game_16","game_17"]
     
     var trackBackground = [Int]()
     var trackGameObject = [Int]()
@@ -121,7 +121,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             let item = collectionView.makeItem(withIdentifier: "TileCollectionViewItem", for: indexPath) as! TileCollectionViewItem
            item.loadTile("\(tileSet[indexPath.item])")
             
-            print("\(tileSet[indexPath.item])")
+           // print("\(tileSet[indexPath.item])")
             return item
         }
     }
@@ -136,7 +136,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             
             let row = index / 48 // 48 == col
             let col = index - (row * 48)
-            print(" index = \(index) at: [\(row),\(col)] ")
+            //print(" index = \(index) at: [\(row),\(col)] ")
             // Add to tile list
             let x = col * 32
             let y = row * 32
@@ -149,10 +149,43 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             }else {
                 let tile = Tile(url:  "\(currentTileID)", index: listGameObject.count, id:currentTileID, x: x, y: y, width: 32, height: 32)
                 listGameObject.append(tile)
+                
+                let track = Track(index: listGameObject.count, track: index)
+                trackForDelete.append(track)
+                
+                print("Da them: index =  \(track.index) - track = \(track.track)")
+               
+            }
+            
+            if ( isErase ){
+                // listTile -> save background Tile always has value -> Change it to -1
+                let tile = Tile(url:  "black", index: index, id:-1, x: x, y: y, width: 32, height: 32)
+                listTiles[index] = tile
+                
+              //  var removeIndex = 0
+             
+                
+                
+                // track has this index
+                if ( trackForDelete.count > 0  ){
+                    for i in 0..<trackForDelete.count{
+                        if trackForDelete[i].track == index{
+                            print("Da xoa: index =  \(trackForDelete[i].index) - track = \(trackForDelete[i].track) ")
+                            listGameObject.remove(at: trackForDelete[i].index)
+                            break
+                        }
+                    }
+                }
+                item.changeImage("black")
+                
+                
             }
            // changeCursorImge(index: "\(currentTileID)")
         }
         else if collectionView == self.objectCollectionView  {
+            
+            isErase = false
+            
             isDrawBG = false
 
             let index = convertToStringFrom(indexPaths)
@@ -167,6 +200,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         }
             
         else{
+            isErase = false
             isDrawBG = true
             let index = convertToStringFrom(indexPaths)
             currentTileID = index
@@ -422,12 +456,16 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     @IBAction func saveObjects(_ sender: Any) {
         listObjectStr = ""
         quadTreeStr = ""
-        let gameObjectTree = Tree(left: 0, top: 1536, size: 1536, tiles: listGameObject, screen: 200, bitmapHeight: 384)
+        let gameObjectTree = Tree(left: 0, top: 1536, size: 1536, tiles: listGameObject, screen: 1536, bitmapHeight: 384)
         
         gameObjectTree.Build(node: gameObjectTree.treeNode!)
         gameObjectTree.Save(node: gameObjectTree.treeNode!)
         createListObject(listObject: listGameObject, isBackground: false)
         showSaveQuadTree(gameObject: listObjectStr, quadTree: quadTreeStr)
+    }
+    @IBAction func eraseBtn(_ sender: Any) {
+        changeCursorImge(index: "black")
+        isErase = true
     }
 }
 

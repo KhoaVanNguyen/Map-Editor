@@ -948,6 +948,9 @@
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="eraser" imagePosition="only" alignment="center" inset="2" id="cAU-fj-DuS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="eraseBtn:" target="XfG-lQ-9wD" id="gq9-ts-7Kk"/>
+                                    </connections>
                                 </buttonCell>
                             </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Px0-IM-jQI">
@@ -1024,7 +1027,7 @@
         <image name="basket" width="32" height="32"/>
         <image name="eraser" width="32" height="32"/>
         <image name="export" width="32" height="32"/>
-        <image name="game_0" width="32" height="98"/>
+        <image name="game_0" width="32" height="32"/>
         <image name="game_27" width="41" height="35"/>
         <image name="radar" width="32" height="32"/>
         <image name="redo" width="32" height="32"/>

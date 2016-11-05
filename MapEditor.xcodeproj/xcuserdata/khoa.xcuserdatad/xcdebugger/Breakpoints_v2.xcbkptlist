@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MapEditor/ViewController.swift"
-            timestampString = "500030409.803183"
+            timestampString = "500045677.927039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MapEditor/ViewController.swift"
-            timestampString = "500030409.803183"
+            timestampString = "500045677.927039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "145"
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MapEditor/ViewController.swift"
-            timestampString = "500031139.062429"
+            timestampString = "500047509.7109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
             landmarkName = "exportImageBtn(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MapEditor/ViewController.swift"
-            timestampString = "500031139.062429"
+            timestampString = "500047509.7109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "375"
+            endingLineNumber = "375"
             landmarkName = "saveBtn(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MapEditor/ViewController.swift"
-            timestampString = "500003265.113097"
+            timestampString = "500045677.927039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MapEditor/ViewController.swift"
-            timestampString = "500031139.062429"
+            timestampString = "500047509.7109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "425"
-            endingLineNumber = "425"
+            startingLineNumber = "459"
+            endingLineNumber = "459"
             landmarkName = "saveObjects(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,13 +186,109 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MapEditor/ViewController.swift"
-            timestampString = "500031139.062429"
+            timestampString = "500047509.7109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "422"
-            endingLineNumber = "422"
+            startingLineNumber = "456"
+            endingLineNumber = "456"
             landmarkName = "saveObjects(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MapEditor/ViewController.swift"
+            timestampString = "500047219.968336"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "collectionView(_:didSelectItemsAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapEditor.ViewController.collectionView (__ObjC.NSCollectionView, didSelectItemsAt : Swift.Set&lt;Foundation.IndexPath&gt;) -&gt; ()"
+                  moduleName = "MapEditor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khoa/Documents/DATA/Learning%20IOS/Map%20Editor/MapEditor/ViewController.swift"
+                  timestampString = "500044831.451729"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "159"
+                  endingLineNumber = "159"
+                  offsetFromSymbolStart = "4187">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapEditor.ViewController.(collectionView (__ObjC.NSCollectionView, didSelectItemsAt : Swift.Set&lt;Foundation.IndexPath&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "MapEditor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khoa/Documents/DATA/Learning%20IOS/Map%20Editor/MapEditor/ViewController.swift"
+                  timestampString = "500044831.455112"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MapEditor/ViewController.swift"
+            timestampString = "500047509.7109"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "collectionView(_:didSelectItemsAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapEditor.ViewController.collectionView (__ObjC.NSCollectionView, didSelectItemsAt : Swift.Set&lt;Foundation.IndexPath&gt;) -&gt; ()"
+                  moduleName = "MapEditor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khoa/Documents/DATA/Learning%20IOS/Map%20Editor/MapEditor/ViewController.swift"
+                  timestampString = "500045679.482844"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "4719">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MapEditor.ViewController.(collectionView (__ObjC.NSCollectionView, didSelectItemsAt : Swift.Set&lt;Foundation.IndexPath&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "MapEditor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khoa/Documents/DATA/Learning%20IOS/Map%20Editor/MapEditor/ViewController.swift"
+                  timestampString = "500045679.48559"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
