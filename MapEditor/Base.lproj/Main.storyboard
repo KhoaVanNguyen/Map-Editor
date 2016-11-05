@@ -856,7 +856,7 @@
                             <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iA9-Vi-hkL">
                                 <rect key="frame" x="8" y="482" width="150" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" title="Background" bezelStyle="shadowlessSquare" image="save" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="Frp-Rs-bLL">
+                                <buttonCell key="cell" type="square" title="Background" bezelStyle="shadowlessSquare" image="save" imagePosition="left" alignment="center" inset="2" id="Frp-Rs-bLL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -918,12 +918,79 @@
                             <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kxj-iM-TUP">
                                 <rect key="frame" x="174" y="482" width="150" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" title="GameObject" bezelStyle="shadowlessSquare" image="save" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="S9l-uz-24s">
+                                <buttonCell key="cell" type="square" title="GameObject" bezelStyle="shadowlessSquare" image="save" imagePosition="left" alignment="center" inset="2" id="S9l-uz-24s">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                     <connections>
                                         <action selector="saveObjects:" target="XfG-lQ-9wD" id="KHn-tE-pxV"/>
                                     </connections>
+                                </buttonCell>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dZi-Fj-8aM">
+                                <rect key="frame" x="365" y="478" width="48" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="undo" imagePosition="only" alignment="center" inset="2" id="CZV-63-Z2u">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DaX-uk-usz">
+                                <rect key="frame" x="423" y="478" width="48" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="redo" imagePosition="only" alignment="center" inset="2" id="k3I-U0-t6R">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUR-0s-Ybn">
+                                <rect key="frame" x="481" y="478" width="48" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="eraser" imagePosition="only" alignment="center" inset="2" id="cAU-fj-DuS">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Px0-IM-jQI">
+                                <rect key="frame" x="332" y="20" width="52" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="radar" id="eL0-cq-UCc"/>
+                            </imageView>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6fh-9J-YEG">
+                                <rect key="frame" x="401" y="26" width="92" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="200" drawsBackground="YES" id="eDE-fo-fXh">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cKh-vl-iMs">
+                                <rect key="frame" x="321" y="67" width="185" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Scan Size" id="jNH-ic-KUn">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJe-fb-gMb">
+                                <rect key="frame" x="539" y="477" width="52" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="basket" imagePosition="only" alignment="center" inset="2" id="rbj-tQ-WzU">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="bwm-fG-4NZ">
+                                <rect key="frame" x="526" y="0.0" width="5" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OWW-kd-Gka">
+                                <rect key="frame" x="601" y="475" width="52" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="select" imagePosition="only" alignment="center" inset="2" id="V2k-oK-w1q">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                         </subviews>
@@ -954,9 +1021,15 @@
     </scenes>
     <resources>
         <image name="48" width="24" height="24"/>
+        <image name="basket" width="32" height="32"/>
+        <image name="eraser" width="32" height="32"/>
         <image name="export" width="32" height="32"/>
         <image name="game_0" width="32" height="98"/>
         <image name="game_27" width="41" height="35"/>
+        <image name="radar" width="32" height="32"/>
+        <image name="redo" width="32" height="32"/>
         <image name="save" width="37.770492553710938" height="37.770492553710938"/>
+        <image name="select" width="32" height="32"/>
+        <image name="undo" width="32" height="32"/>
     </resources>
 </document>
