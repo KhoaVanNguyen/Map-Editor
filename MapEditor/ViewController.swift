@@ -10,6 +10,8 @@ import Cocoa
 import ImageIO
 import AppKit
 class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout{
+
+    @IBOutlet weak var currentImg: NSButton!
     @IBOutlet weak var backgroundScrollView: NSScrollView!
     
     @IBOutlet weak var gameObjectSrollView: NSScrollView!
@@ -44,6 +46,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     var trackBackground = [Int]()
     var trackGameObject = [Int]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureMapCollectionView(rows: 10, columns: 48)
@@ -160,6 +163,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             pickingImg = gameSet[currentTileID]
             
             changeCursorImge(index: "\(gameSet[index])")
+            currentImg.image = NSImage(named: "\(gameSet[index])")
         }
             
         else{
@@ -170,7 +174,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             
             
             changeCursorImge(index: "\(index)")
-           
+            currentImg.image = NSImage(named: "\(index)")
         }
     }
     
@@ -270,7 +274,6 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             let file = "tileset.png"
             let path = dir.appendingPathComponent(file)
-            
             //writing
             do {
                 try  pngData?.write(to: path)
@@ -278,25 +281,46 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             catch {/* error handling here */}
         }
     }
-    // MARK: SAVE QUADTREE FILE
     
-    func saveQuadTreeFile(quadtreeFileName : String, url : String ){
+   // MARK: SHOW SAVE QUADTREE
+    func showSaveQuadTree(gameObject :String, quadTree : String ){
         
-        var final = ""
-        createListObject()
+        var finalStr = ""
+        finalStr += gameObject + quadTree
         
-        final += listObjectStr + "\n" + quadTreeStr
-        writeToFile(content: final, fileName: quadtreeFileName, url : url)
+        let savePanel = NSSavePanel()
+        savePanel.setAccessibilityExpanded(true)
+        savePanel.canCreateDirectories = true
+        savePanel.title = "Save QuadTree Game Object"
+        savePanel.allowedFileTypes = ["txt","docx"]
+        savePanel.begin { (result) in
+            
+            if result == NSFileHandlingPanelOKButton {
+                let savedUrl = savePanel.url
+                quadTreeName = savePanel.nameFieldStringValue
+                
+                quadTreeUrl = (savedUrl?.path)!
+                writeToFile(content: finalStr, fileName: quadTreeName, url : quadTreeUrl)
+                
+            }
+        }
     }
-    
-    // MARK: Create List Objects String
-    
-    func createListObject(){
-        listObjectStr += "\(tileSet.count)" + "\n"
-        listObjectStr += "\(trackBackground.count) \(1536) \(384)" + "\n"
-        
-        for i in 0..<listTiles.count{
-            listObjectStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)" + "\n"
+    // MARK: CREATE LIST OBJECT STRING
+    func createListObject(listObject : [Tile], isBackground : Bool ){
+        if ( isBackground ){
+            listObjectStr += "\(tileSet.count)" + "\n"
+        }
+        listObjectStr += "\(listObject.count) \(SCREEN_WIDTH) \(SCREEN_HEIGHT)" + "\n"
+        if ( isBackground ){
+            for i in 0..<listObject.count{
+                listObjectStr += "\(listObject[i].index) \(listObject[i].id) \(listObject[i].x) \(listObject[i].y)" + "\n"
+            }
+        }
+        else {
+            for i in 0..<listObject.count{
+                listObjectStr += "\(listObject[i].index) \(listObject[i].id) \(listObject[i].x) \(listObject[i].y) \(listObject[i].width) \(listObject[i].height)" + "\n"
+            }
+
         }
         
     }
@@ -308,30 +332,18 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     @IBAction func saveBtn(_ sender: Any) {
         
         
-       
+        listObjectStr = ""
+        quadTreeStr = ""
         let tree = Tree(left: 0, top: 1536, size: 1536, tiles: listTiles, screen: 200, bitmapHeight: 384)
         tree.Build(node: tree.treeNode!)
         tree.Save(node: tree.treeNode! )
         
         
-        let savePanel = NSSavePanel()
-        savePanel.setAccessibilityExpanded(true)
-        savePanel.canCreateDirectories = true
-        savePanel.title = "Save QuadTree File"
-        savePanel.allowedFileTypes = ["txt","docx"]
-        savePanel.begin { (result) in
-            
-            if result == NSFileHandlingPanelOKButton {
-                let savedUrl = savePanel.url
-                quadTreeName = savePanel.nameFieldStringValue
-                
-               quadTreeUrl = (savedUrl?.path)!
-                self.saveQuadTreeFile(quadtreeFileName: quadTreeName, url: quadTreeUrl)
-                
-            }
-        }
+        createListObject(listObject: listTiles, isBackground: true)
+        showSaveQuadTree(gameObject: listObjectStr, quadTree: quadTreeStr)
         
-
+        
+        // save tile map
         let file = "tilemap.txt"
         
         var countRow = 1;
@@ -348,8 +360,6 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             }
             outputText += "\(trackBackground[i]) "
         }
-        
-        
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             
             let path = dir.appendingPathComponent(file)
@@ -363,7 +373,6 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             
         }
     }
-
     @IBAction func rowStepper(_ sender: NSStepper) {
     
         rowLbl.stringValue = "\( sender.valueWraps )"
@@ -381,9 +390,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     }
     
     @IBAction func columnTextChange(_ sender: Any) {
-        
         COLUMNS = Int(columnLbl.stringValue)!
-        
         self.configureMapCollectionView(rows: ROWS, columns: COLUMNS)
         mapCollectionView.reloadData()
         
@@ -408,54 +415,20 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             gameObjectSrollView.isHidden = true
             gameObjectSrollView.setAccessibilityEnabled(false)
             objectCollectionView.isSelectable = false
-            
-           
         }
-        print("Segment is selected: \(sender.selectedSegment)")
     }
+    
+    
     @IBAction func saveObjects(_ sender: Any) {
-        
-        
-        var gameObjectStr : String = ""
-        gameObjectStr += "\(listGameObject.count) \(1536) \(384)" + "\n"
-        
-        for i in 0..<listGameObject.count{
-            gameObjectStr += "\(listGameObject[i].index) \(listGameObject[i].id) \(listGameObject[i].x) \(listGameObject[i].y) \(listGameObject[i].x) \(listGameObject[i].y)" + "\n"
-        }
-        
-        
+        listObjectStr = ""
         quadTreeStr = ""
         let gameObjectTree = Tree(left: 0, top: 1536, size: 1536, tiles: listGameObject, screen: 200, bitmapHeight: 384)
         
         gameObjectTree.Build(node: gameObjectTree.treeNode!)
         gameObjectTree.Save(node: gameObjectTree.treeNode!)
-        
-        
-        var finalStr = ""
-        finalStr += gameObjectStr  + "\n" + quadTreeStr
-        
-        let savePanel = NSSavePanel()
-        savePanel.setAccessibilityExpanded(true)
-        savePanel.canCreateDirectories = true
-        savePanel.title = "Save QuadTree Game Object"
-        savePanel.allowedFileTypes = ["txt","docx"]
-        savePanel.begin { (result) in
-            
-            if result == NSFileHandlingPanelOKButton {
-                let savedUrl = savePanel.url
-                quadTreeName = savePanel.nameFieldStringValue
-                
-                quadTreeUrl = (savedUrl?.path)!
-                // self.saveQuadTreeFile(quadtreeFileName: quadTreeName, url: quadTreeUrl)
-                
-               
-                writeToFile(content: finalStr, fileName: quadTreeName, url : quadTreeUrl)
-                
-            }
-        }
+        createListObject(listObject: listGameObject, isBackground: false)
+        showSaveQuadTree(gameObject: listObjectStr, quadTree: quadTreeStr)
     }
-
-
 }
 
 

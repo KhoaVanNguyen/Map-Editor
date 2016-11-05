@@ -761,9 +761,9 @@
                                 </scroller>
                             </scrollView>
                             <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yex-aE-q9y">
-                                <rect key="frame" x="759" y="478" width="117" height="29"/>
+                                <rect key="frame" x="759" y="478" width="280" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" title="Export TileSet" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="V7z-fO-uup">
+                                <buttonCell key="cell" type="square" title="Export TileSet" bezelStyle="shadowlessSquare" image="export" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="V7z-fO-uup">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -794,11 +794,6 @@
                                     </connections>
                                 </stepperCell>
                             </stepper>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="quQ-ZK-mMB">
-                                <rect key="frame" x="2" y="-1" width="72" height="68"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="6" id="YnN-Go-j0M"/>
-                            </imageView>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rMz-3v-EFL">
                                 <rect key="frame" x="193" y="50" width="63" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -859,9 +854,9 @@
                                 </textFieldCell>
                             </textField>
                             <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iA9-Vi-hkL">
-                                <rect key="frame" x="20" y="482" width="84" height="38"/>
+                                <rect key="frame" x="8" y="482" width="150" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" title="Save" bezelStyle="shadowlessSquare" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="Frp-Rs-bLL">
+                                <buttonCell key="cell" type="square" title="Background" bezelStyle="shadowlessSquare" image="save" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="Frp-Rs-bLL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -896,10 +891,34 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kxj-iM-TUP">
-                                <rect key="frame" x="121" y="482" width="119" height="38"/>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jL6-Da-ihV">
+                                <rect key="frame" x="13" y="10" width="58" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" title="Save GameObject" bezelStyle="shadowlessSquare" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="S9l-uz-24s">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="game_0" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="DBH-g2-G9e">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="VOA-IH-9Bw">
+                                <rect key="frame" x="346" y="469" width="5" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                            <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="xxd-4g-ev5">
+                                <rect key="frame" x="93" y="0.0" width="5" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                            <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="rrl-1P-yqz">
+                                <rect key="frame" x="321" y="0.0" width="5" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                            <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="saP-ta-hf5">
+                                <rect key="frame" x="737" y="0.0" width="5" height="532"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                            <button wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kxj-iM-TUP">
+                                <rect key="frame" x="174" y="482" width="150" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" title="GameObject" bezelStyle="shadowlessSquare" image="save" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="S9l-uz-24s">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                     <connections>
@@ -920,6 +939,7 @@
                     <connections>
                         <outlet property="backgroundScrollView" destination="Obz-af-cns" id="poB-hY-0cT"/>
                         <outlet property="columnLbl" destination="kXu-an-QuY" id="11x-Cq-2Y8"/>
+                        <outlet property="currentImg" destination="jL6-Da-ihV" id="d3Q-Rg-Q5j"/>
                         <outlet property="gameObjectSrollView" destination="81P-2f-V3u" id="i0X-1I-OXb"/>
                         <outlet property="mapCollectionView" destination="T4d-lO-thK" id="744-du-h2y"/>
                         <outlet property="objectCollectionView" destination="h3r-T0-gzY" id="Dtv-G6-0Q2"/>
@@ -934,7 +954,9 @@
     </scenes>
     <resources>
         <image name="48" width="24" height="24"/>
-        <image name="6" width="24" height="24"/>
+        <image name="export" width="32" height="32"/>
+        <image name="game_0" width="32" height="98"/>
         <image name="game_27" width="41" height="35"/>
+        <image name="save" width="37.770492553710938" height="37.770492553710938"/>
     </resources>
 </document>
