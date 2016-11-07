@@ -22,10 +22,14 @@ var ROWS = 10
 var COLUMNS = 48
 
 
-var SCREEN_WIDTH = ROWS * 32
-var SCREEN_HEIGHT =  COLUMNS * 32
+var SCREEN_WIDTH = COLUMNS * 32
+var SCREEN_HEIGHT =  ROWS * 32
+
 var TILE_SIZE = 32
 
+var LIMIT_QUADTREED_SIZE = 200
+var LIMIT_BG_QUADTREED_SIZE = 1536
+var LIMIT_GO_QUADTREED_SIZE = 1536
 func convertToStringFrom(_ indexPath : Set<IndexPath>) -> Int{
     var s =  String(describing: indexPath)
     s.characters.removeLast(2)

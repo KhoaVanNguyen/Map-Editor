@@ -33,7 +33,7 @@ class Tree{
     // ex params: list Object  - leftTop node
     func Divide( node :  Node ){
         
-        
+    
         // erase gameObject of node first
         
         node.listObject = [Tile]()
@@ -44,7 +44,7 @@ class Tree{
             
             let tempRect = NSRect(x: globalTiles[i].x, y: globalTiles[i].y, width: globalTiles[i].width, height: globalTiles[i].height)
             
-            if ( nodeRect.intersects(tempRect) && nodeRect.size.width < CGFloat(200)
+            if ( nodeRect.intersects(tempRect) && nodeRect.size.width < CGFloat(screen)
                 && globalTiles[i].id != -1 ){
                 
                 node.listObject.append(globalTiles[i])
