@@ -54,10 +54,6 @@ class Tree{
             i -= 1;
         }
     }
-    
-    
-    
-    
     func Build(node :  Node){
         
         
@@ -72,8 +68,6 @@ class Tree{
             return
         }
         else {
-            
-            
             node.leftTop =  Node(left: node.left, top: node.top , size: node.size / 2, id: node.id * 8 + 1);
             node.rightTop =  Node(left: node.left + node.size / 2, top: node.top , size: node.size / 2, id: node.id * 8 + 2);
             node.leftBottom = Node(left: node.left, top: node.top / 2 , size: node.size / 2, id: node.id * 8 + 3);
@@ -93,14 +87,12 @@ class Tree{
             
         }
     }
-    
     func Save(node : Node?  ){
         if node == nil{
             return
         }
         else
         {
-            
             quadTreeStr += "\(node!.id) \(node!.left) \(node!.top) \(node!.size) "
             // Game Object cua mot node
             if ( node?.listObject.count != 0 ){
@@ -109,7 +101,6 @@ class Tree{
                 }
             }
             quadTreeStr += "\n"
-            
             // De Quy va Save lai
             Save( node: node?.leftTop )
             Save( node: node?.rightTop )

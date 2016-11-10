@@ -18,6 +18,7 @@
 		D2A0A6501DB27B4E002FAB2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2A0A64F1DB27B4E002FAB2A /* Assets.xcassets */; };
 		D2A0A65C1DB27D43002FAB2A /* CollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0A65A1DB27D43002FAB2A /* CollectionViewItem.swift */; };
 		D2A0A6631DB288B1002FAB2A /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0A6621DB288B1002FAB2A /* Tile.swift */; };
+		D2A59E311DD4502A009D63A0 /* GameObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A59E301DD4502A009D63A0 /* GameObjectView.swift */; };
 		D2D402FC1DB32FD600E602BE /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D402FA1DB32FD600E602BE /* CollectionViewItem.xib */; };
 		D2D402FD1DB32FD600E602BE /* TileCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D402FB1DB32FD600E602BE /* TileCollectionViewItem.xib */; };
 		D2D403001DB32FEF00E602BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D402FE1DB32FEF00E602BE /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		D2A0A64F1DB27B4E002FAB2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2A0A65A1DB27D43002FAB2A /* CollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewItem.swift; sourceTree = "<group>"; };
 		D2A0A6621DB288B1002FAB2A /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		D2A59E301DD4502A009D63A0 /* GameObjectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameObjectView.swift; sourceTree = "<group>"; };
 		D2D402FA1DB32FD600E602BE /* CollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CollectionViewItem.xib; path = MapEditor/CollectionViewItem.xib; sourceTree = "<group>"; };
 		D2D402FB1DB32FD600E602BE /* TileCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TileCollectionViewItem.xib; path = MapEditor/TileCollectionViewItem.xib; sourceTree = "<group>"; };
 		D2D402FF1DB32FEF00E602BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MapEditor/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				D2A0A65A1DB27D43002FAB2A /* CollectionViewItem.swift */,
+				D2A59E301DD4502A009D63A0 /* GameObjectView.swift */,
 				D216AEE11DCC315600CE4399 /* CustomCollectionView.swift */,
 				D216AEDD1DCC2CA800CE4399 /* GameObjectViewItem.swift */,
 				D225E90A1DB355C30068F395 /* TileCollectionViewItem.swift */,
@@ -222,6 +225,7 @@
 				D2FA622A1DBBB4D800198174 /* Node.swift in Sources */,
 				D203C6141DCE14B400281158 /* Track.swift in Sources */,
 				D225E9091DB34F5F0068F395 /* Constant.swift in Sources */,
+				D2A59E311DD4502A009D63A0 /* GameObjectView.swift in Sources */,
 				D2D6F7E21DCCC85800089235 /* QuadTreeFile.swift in Sources */,
 				D2A0A64E1DB27B4E002FAB2A /* ViewController.swift in Sources */,
 				D2A0A6631DB288B1002FAB2A /* Tile.swift in Sources */,

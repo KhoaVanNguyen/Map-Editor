@@ -15,12 +15,13 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     @IBOutlet weak var backgroundScrollView: NSScrollView!
     
     @IBOutlet weak var gameObjectSrollView: NSScrollView!
-    @IBOutlet weak var objectCollectionView: NSCollectionView!
+    
     @IBOutlet weak var columnLbl: NSTextField!
     @IBOutlet weak var rowLbl: NSTextField!
     @IBOutlet weak var mapCollectionView: NSCollectionView!
     
     @IBOutlet weak var tileCollectionView: NSCollectionView!
+    @IBOutlet weak var objectCollectionView: NSCollectionView!
    
     
     var isDrawBG = true
@@ -49,9 +50,19 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let recoverTile = UserDefaults.standard.object(forKey: "ListTiles") as? [Tile] {
+            print("ALO")
+            print(recoverTile)
+        }
+        
         configureMapCollectionView(rows: 10, columns: 48)
+        
         configureTileCollectionView(collectionView: tileCollectionView)
-        configureTileCollectionView(collectionView: objectCollectionView)
+        
+       // configureTileCollectionView(collectionView: objectCollectionView)
+        
+        configureGameObject()
         initTrackBackground()
         
         self.view.layer?.backgroundColor = CGColor(red: 24, green: 122, blue: 12, alpha: 1)
@@ -108,6 +119,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
        
         if ( collectionView == self.mapCollectionView  ){
         let item = collectionView.makeItem(withIdentifier: "CollectionViewItem", for: indexPath) as! CollectionViewItem
+            item.changeImage(listTiles[indexPath.item].imageUrl)
         return item
         }
         else if collectionView == self.objectCollectionView  {
@@ -252,17 +264,38 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         
     }
     
+    private func configureGameObject() {
+        
+        let flowLayout = NSCollectionViewFlowLayout()
+        flowLayout.itemSize = NSSize(width: 64.0, height: 64.0)
+        // flowLayout.sectionInset = EdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
+        flowLayout.minimumInteritemSpacing = 1
+        flowLayout.minimumLineSpacing = 1
+        //mapCollectionView.collectionViewLayout = flowLayout
+        
+        
+        objectCollectionView.collectionViewLayout = flowLayout
+        view.wantsLayer = true
+        
+        // tileCollectionView.layer?.backgroundColor = NSColor.black.cgColor
+        //tileCollectionView.isSelectable = true
+        objectCollectionView.isSelectable = true
+        
+    }
+
+    
+    
     // MARK: CONFIGURE TRACKING ARRAYS
     func initTrackBackground(){
         var i = 0
-        while ( i <= 479){
+        while ( i < COLUMNS*ROWS){
             trackBackground.append(0)
             
             
-            let row = i / 48 // 48 == col
-            let col = i - (row * 48)
-            let x = col * 32
-            let y = row * 32
+            let row = i / COLUMNS // 48 == col
+            let col = i - (row * COLUMNS)
+            let x = col * TILE_SIZE
+            let y = row * TILE_SIZE
             
             let tile = Tile(url: "-1", index: i, id: -1, x: x, y: y, width: 32, height: 32)
             listTiles.append(tile)
@@ -287,6 +320,8 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     }
  
     // MARK: MOUSE
+    
+    
     override func mouseEntered(with event: NSEvent) {
      
             changeCursorImge(index: "\(currentTileID)")
@@ -462,6 +497,71 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         gameObjectTree.Save(node: gameObjectTree.treeNode!)
         createListObject(listObject: listGameObject, isBackground: false)
         showSaveQuadTree(gameObject: listObjectStr, quadTree: quadTreeStr)
+    }
+    @IBAction func saveMap(_ sender: Any) {
+        print("I'm saving")
+        
+        
+        var finalStr = ""
+    
+        
+        for i in 0..<listTiles.count{
+                finalStr += "\(listTiles[i].imageUrl) \(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y) \(listTiles[i].width) \(listTiles[i].height)" + "\n"
+            if (i == listTiles.count - 1) {
+                finalStr += "\(listTiles[i].imageUrl) \(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y) \(listTiles[i].width) \(listTiles[i].height)"}
+        }
+        
+        let savePanel = NSSavePanel()
+        savePanel.setAccessibilityExpanded(true)
+        savePanel.canCreateDirectories = true
+        savePanel.title = "SAVE MAP"
+        savePanel.allowedFileTypes = ["txt","docx"]
+        savePanel.begin { (result) in
+            
+            if result == NSFileHandlingPanelOKButton {
+                let savedUrl = savePanel.url
+                let filename = savePanel.nameFieldStringValue
+                
+                let filePath = (savedUrl?.path)!
+                writeToFile(content: finalStr, fileName: filename, url : filePath)
+                
+            }
+        }
+        
+    }
+    @IBAction func loadMap(_ sender: Any) {
+        let openPanel = NSOpenPanel()
+        openPanel.setAccessibilityExpanded(true)
+        openPanel.title = "LOAD MAP"
+        openPanel.allowsMultipleSelection = false
+        openPanel.allowedFileTypes = ["txt","docx"]
+        
+        let i = openPanel.runModal()
+        if i == NSModalResponseOK{
+            let fileUrl = openPanel.url!
+            let filePath = fileUrl.absoluteURL
+            print(filePath)
+            do {
+                let text = try String(contentsOf: filePath, encoding: String.Encoding.utf8)
+                
+                var myStrings = text.components(separatedBy: "\n")
+                
+                myStrings.remove(at: myStrings.count-1)
+                myStrings.remove(at: myStrings.count-1)
+                print(myStrings[4])
+                
+                for i in 0..<myStrings.count{
+                    let tile = Tile(data: myStrings[i])
+                    listTiles[i] = tile
+                    mapCollectionView.reloadData()
+                }
+            }
+            catch {
+                print("Read file error")
+            
+            }
+        }
+        
     }
     @IBAction func eraseBtn(_ sender: Any) {
         changeCursorImge(index: "black")

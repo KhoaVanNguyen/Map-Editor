@@ -28,4 +28,17 @@ class Tile {
         self.width = width
         self.height = height
     }
+    init(data : String) {
+        let seperatedData = data.components(separatedBy: " ")
+        self.imageUrl = seperatedData[0]
+        self.index = Int(seperatedData[1])!
+        self.id = Int(seperatedData[2])!
+        self.x = Int(seperatedData[3])!
+        self.y = Int(seperatedData[4])!
+        self.width = Int(seperatedData[5])!
+        self.height = Int(seperatedData[6])!
+    }
+    
+
+    
 }
