@@ -10,4 +10,4 @@ Functions
 5. Save, delete, undo, redo when draw tiles
 
 
-[<img src="MapEditor/screenshots/1.png"]
+![alt tag](MapEditor/screenshots/1.png)
