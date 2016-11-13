@@ -28,16 +28,19 @@ class Tile {
         self.width = width
         self.height = height
     }
-    init(data : String) {
-        let seperatedData = data.components(separatedBy: " ")
-        self.imageUrl = seperatedData[0]
-        self.index = Int(seperatedData[1])!
-        self.id = Int(seperatedData[2])!
-        self.x = Int(seperatedData[3])!
-        self.y = Int(seperatedData[4])!
-        self.width = Int(seperatedData[5])!
-        self.height = Int(seperatedData[6])!
+    init(input : [String]) {
+        // input = index - id
+        self.index = Int(input[0])!
+        self.imageUrl = input[1]
+        self.id = Int(input[1])!
+        self.x = 0
+        self.y = 0
+        self.width = 32
+        self.height = 32
+
+        
     }
+
     
 
     

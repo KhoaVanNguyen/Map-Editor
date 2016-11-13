@@ -50,11 +50,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let recoverTile = UserDefaults.standard.object(forKey: "ListTiles") as? [Tile] {
-            print("ALO")
-            print(recoverTile)
-        }
+    
         
         configureMapCollectionView(rows: 10, columns: 48)
         
@@ -148,7 +144,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             
             let row = index / 48 // 48 == col
             let col = index - (row * 48)
-            //print(" index = \(index) at: [\(row),\(col)] ")
+            print(" index = \(index) at: [\(row),\(col)] ")
             // Add to tile list
             let x = col * 32
             let y = row * 32
@@ -282,6 +278,23 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         objectCollectionView.isSelectable = true
         
     }
+    // MARK: CALCULATE THE TILE'S POSITION
+    func CalTilePosition(){
+    let numberOfTile = COLUMNS * ROWS
+    
+    for i in 0..<numberOfTile{
+        let row = i / COLUMNS
+        let col = i - (row * 48)
+        //print(" index = \(index) at: [\(row),\(col)] ")
+        // Add to tile list
+        let x = col * TILE_SIZE
+        let y = row * TILE_SIZE
+        
+        listTiles[i].x = x
+        listTiles[i].y = y
+    }
+    
+ }
 
     
     
@@ -400,6 +413,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     }
     @IBAction func saveBtn(_ sender: Any) {
         
+        CalTilePosition()
         
         listObjectStr = ""
         quadTreeStr = ""
@@ -504,12 +518,14 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         
         var finalStr = ""
     
+        //id index x y
         
         for i in 0..<listTiles.count{
-                finalStr += "\(listTiles[i].imageUrl) \(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y) \(listTiles[i].width) \(listTiles[i].height)" + "\n"
+                finalStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)" + "\n"
             if (i == listTiles.count - 1) {
-                finalStr += "\(listTiles[i].imageUrl) \(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y) \(listTiles[i].width) \(listTiles[i].height)"}
+               finalStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)"
         }
+    }
         
         let savePanel = NSSavePanel()
         savePanel.setAccessibilityExpanded(true)
@@ -543,15 +559,14 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             print(filePath)
             do {
                 let text = try String(contentsOf: filePath, encoding: String.Encoding.utf8)
-                
                 var myStrings = text.components(separatedBy: "\n")
-                
-                myStrings.remove(at: myStrings.count-1)
-                myStrings.remove(at: myStrings.count-1)
-                print(myStrings[4])
-                
+                // like the txt file already
                 for i in 0..<myStrings.count{
-                    let tile = Tile(data: myStrings[i])
+                    let child = myStrings[i].components(separatedBy: " ")
+                    // child = index id x y => Get the id === imageUrl
+                    //index - imageUrl
+                    // 452 48 640 288
+                    let tile = Tile(input: child)
                     listTiles[i] = tile
                     mapCollectionView.reloadData()
                 }
