@@ -11,6 +11,8 @@ import ImageIO
 import AppKit
 class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout{
 
+    @IBOutlet weak var quadtreeGOSizeLbl: NSTextField!
+    @IBOutlet weak var quadtreeBgSizeLbl: NSTextField!
     @IBOutlet weak var currentImg: NSButton!
     @IBOutlet weak var backgroundScrollView: NSScrollView!
     
@@ -287,13 +289,13 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         let col = i - (row * 48)
         //print(" index = \(index) at: [\(row),\(col)] ")
         // Add to tile list
-        let x = col * TILE_SIZE
-        let y = row * TILE_SIZE
+        let x = ( col * TILE_SIZE ) + 16 // OK
+        let y = ( SCREEN_HEIGHT - (row * 32) ) - 16
         
         listTiles[i].x = x
         listTiles[i].y = y
     }
-    
+     
  }
 
     
@@ -408,16 +410,20 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     }
 
     // MARK: Control Interactions
+    
+    
+  
     @IBAction func exportImageBtn(_ sender: Any) {
         exportTileSet()
     }
+    // MARK: SAVE BACKGROUND QUADTREE
     @IBAction func saveBtn(_ sender: Any) {
         
         CalTilePosition()
         
         listObjectStr = ""
         quadTreeStr = ""
-        let tree = Tree(left: 0, top: 1536, size: 1536, tiles: listTiles, screen: 200, bitmapHeight: 384)
+        let tree = Tree(left: 0, top: 1536, size: 1536, tiles: listTiles, screen: LIMIT_BG_QUADTREED_SIZE, bitmapHeight: 384)
         tree.Build(node: tree.treeNode!)
         tree.Save(node: tree.treeNode! )
         
@@ -456,6 +462,19 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             
         }
     }
+    // MARK: SAVE GAMEOBJECT QUADTREE
+    @IBAction func saveObjects(_ sender: Any) {
+        listObjectStr = ""
+        quadTreeStr = ""
+        let gameObjectTree = Tree(left: 0, top: 1536, size: 1536, tiles: listGameObject, screen: LIMIT_GO_QUADTREED_SIZE, bitmapHeight: 384)
+        
+        gameObjectTree.Build(node: gameObjectTree.treeNode!)
+        gameObjectTree.Save(node: gameObjectTree.treeNode!)
+        createListObject(listObject: listGameObject, isBackground: false)
+        showSaveQuadTree(gameObject: listObjectStr, quadTree: quadTreeStr)
+    }
+    
+    // MARK: SELECT ROW & COLUMN
     @IBAction func rowStepper(_ sender: NSStepper) {
     
         rowLbl.stringValue = "\( sender.valueWraps )"
@@ -478,6 +497,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         mapCollectionView.reloadData()
         
     }
+    // MARK: SEGMENT CONTROL
     @IBAction func segmentCellchange(_ sender: NSSegmentedCell) {
         
         // game
@@ -491,6 +511,36 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             objectCollectionView.isSelectable = true
          
         }else if ( sender.selectedSegment == 0 ){
+            
+            let alert = NSAlert()
+            
+            alert.alertStyle = .informational
+            alert.informativeText = "Chọn level để import Tileset!"
+            alert.messageText = "Chọn Level"
+            
+            alert.addButton(withTitle: "Cancel")
+            alert.addButton(withTitle: "LEVEL 1")
+            alert.addButton(withTitle: "LEVEL 2")
+            alert.addButton(withTitle: "LEVEL 3")
+           
+
+
+
+            alert.beginSheetModal(for: self.view.window!, completionHandler: { returnCode -> Void in
+                if returnCode == NSAlertSecondButtonReturn{
+                    self.chooseLevel(level: 1)
+                }
+                else if returnCode == NSAlertThirdButtonReturn{
+                    self.chooseLevel(level: 2)
+                }
+                else if returnCode == NSAlertThirdButtonReturn + 1{
+                    self.chooseLevel(level: 3)
+                }
+            
+              
+            })
+
+          
             backgroundScrollView.isHidden = false
             backgroundScrollView.setAccessibilityEnabled(true)
             tileCollectionView.isSelectable = true
@@ -498,34 +548,30 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             gameObjectSrollView.isHidden = true
             gameObjectSrollView.setAccessibilityEnabled(false)
             objectCollectionView.isSelectable = false
+            
+           
         }
     }
     
-    
-    @IBAction func saveObjects(_ sender: Any) {
-        listObjectStr = ""
-        quadTreeStr = ""
-        let gameObjectTree = Tree(left: 0, top: 1536, size: 1536, tiles: listGameObject, screen: 1536, bitmapHeight: 384)
-        
-        gameObjectTree.Build(node: gameObjectTree.treeNode!)
-        gameObjectTree.Save(node: gameObjectTree.treeNode!)
-        createListObject(listObject: listGameObject, isBackground: false)
-        showSaveQuadTree(gameObject: listObjectStr, quadTree: quadTreeStr)
+    func chooseLevel(level : Int){
+        print("Level here - \(level) ")
     }
+   
+    // MARK: SAVE MAP
     @IBAction func saveMap(_ sender: Any) {
         print("I'm saving")
         
         
         var finalStr = ""
-    
+        
         //id index x y
         
         for i in 0..<listTiles.count{
-                finalStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)" + "\n"
+            finalStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)" + "\n"
             if (i == listTiles.count - 1) {
-               finalStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)"
+                finalStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)"
+            }
         }
-    }
         
         let savePanel = NSSavePanel()
         savePanel.setAccessibilityExpanded(true)
@@ -543,8 +589,8 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
                 
             }
         }
-        
     }
+    // MARK: LOAD MAP
     @IBAction func loadMap(_ sender: Any) {
         let openPanel = NSOpenPanel()
         openPanel.setAccessibilityExpanded(true)
@@ -573,11 +619,19 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             }
             catch {
                 print("Read file error")
-            
+                
             }
         }
+    }
+    // MARK: SCAN QUADTREE SIZE
+    @IBAction func quadtreeBGsize(_ sender: Any) {
+        LIMIT_BG_QUADTREED_SIZE = Int(quadtreeBgSizeLbl.stringValue)!
         
     }
+    @IBAction func quadtreeGOSize(_ sender: Any) {
+        LIMIT_GO_QUADTREED_SIZE = Int(quadtreeGOSizeLbl.stringValue)!
+    }
+    
     @IBAction func eraseBtn(_ sender: Any) {
         changeCursorImge(index: "black")
         isErase = true

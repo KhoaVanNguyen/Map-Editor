@@ -15,10 +15,10 @@
 		D225E90B1DB355C30068F395 /* TileCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225E90A1DB355C30068F395 /* TileCollectionViewItem.swift */; };
 		D2A0A64C1DB27B4E002FAB2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0A64B1DB27B4E002FAB2A /* AppDelegate.swift */; };
 		D2A0A64E1DB27B4E002FAB2A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0A64D1DB27B4E002FAB2A /* ViewController.swift */; };
-		D2A0A6501DB27B4E002FAB2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2A0A64F1DB27B4E002FAB2A /* Assets.xcassets */; };
 		D2A0A65C1DB27D43002FAB2A /* CollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0A65A1DB27D43002FAB2A /* CollectionViewItem.swift */; };
 		D2A0A6631DB288B1002FAB2A /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0A6621DB288B1002FAB2A /* Tile.swift */; };
 		D2A59E311DD4502A009D63A0 /* GameObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A59E301DD4502A009D63A0 /* GameObjectView.swift */; };
+		D2C629991DD84B9600B11C14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C629981DD84B9600B11C14 /* Assets.xcassets */; };
 		D2D402FC1DB32FD600E602BE /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D402FA1DB32FD600E602BE /* CollectionViewItem.xib */; };
 		D2D402FD1DB32FD600E602BE /* TileCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D402FB1DB32FD600E602BE /* TileCollectionViewItem.xib */; };
 		D2D403001DB32FEF00E602BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D402FE1DB32FEF00E602BE /* Main.storyboard */; };
@@ -38,10 +38,10 @@
 		D2A0A6481DB27B4E002FAB2A /* MapEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2A0A64B1DB27B4E002FAB2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2A0A64D1DB27B4E002FAB2A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D2A0A64F1DB27B4E002FAB2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2A0A65A1DB27D43002FAB2A /* CollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewItem.swift; sourceTree = "<group>"; };
 		D2A0A6621DB288B1002FAB2A /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		D2A59E301DD4502A009D63A0 /* GameObjectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameObjectView.swift; sourceTree = "<group>"; };
+		D2C629981DD84B9600B11C14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = MapEditor/Assets.xcassets; sourceTree = "<group>"; };
 		D2D402FA1DB32FD600E602BE /* CollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CollectionViewItem.xib; path = MapEditor/CollectionViewItem.xib; sourceTree = "<group>"; };
 		D2D402FB1DB32FD600E602BE /* TileCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TileCollectionViewItem.xib; path = MapEditor/TileCollectionViewItem.xib; sourceTree = "<group>"; };
 		D2D402FF1DB32FEF00E602BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MapEditor/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -95,7 +95,6 @@
 				D2A0A65F1DB2821C002FAB2A /* Models */,
 				D2A0A6641DB28CD7002FAB2A /* Controller */,
 				D2A0A6691DB31ADC002FAB2A /* Design */,
-				D2A0A64F1DB27B4E002FAB2A /* Assets.xcassets */,
 				D2D403011DB3300900E602BE /* Info.plist */,
 			);
 			path = MapEditor;
@@ -140,6 +139,7 @@
 				D2D402FA1DB32FD600E602BE /* CollectionViewItem.xib */,
 				D2D402FB1DB32FD600E602BE /* TileCollectionViewItem.xib */,
 				D2D402FE1DB32FEF00E602BE /* Main.storyboard */,
+				D2C629981DD84B9600B11C14 /* Assets.xcassets */,
 			);
 			name = Design;
 			path = ..;
@@ -206,11 +206,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2A0A6501DB27B4E002FAB2A /* Assets.xcassets in Resources */,
 				D2D402FC1DB32FD600E602BE /* CollectionViewItem.xib in Resources */,
 				D2D402FD1DB32FD600E602BE /* TileCollectionViewItem.xib in Resources */,
 				D2D403021DB3300900E602BE /* Info.plist in Resources */,
 				D216AEE01DCC2CA800CE4399 /* GameObjectViewItem.xib in Resources */,
+				D2C629991DD84B9600B11C14 /* Assets.xcassets in Resources */,
 				D2D403001DB32FEF00E602BE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
