@@ -41,11 +41,11 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     var cursor = NSCursor()
     
     
-    let tileSet = [0,1,2,3,4,5,6,7,8,9,10,11,12,12,14,15,16,17,18,19,20,
+    var tileSet = [0,1,2,3,4,5,6,7,8,9,10,11,12,12,14,15,16,17,18,19,20,
                    21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,
                    40,41,42,43,44,45,46,47,48]
     
-    let gameSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",                   "game_7","game_8","game_9","game_10","game_11","game_12",                   "game_13","game_14","game_15","game_16","game_17"]
+    var gameSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",                   "game_7","game_8","game_9","game_10","game_11","game_12",                   "game_13","game_14","game_15","game_16","game_17"]
     
     var trackBackground = [Int]()
     var trackGameObject = [Int]()
@@ -529,6 +529,9 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             alert.beginSheetModal(for: self.view.window!, completionHandler: { returnCode -> Void in
                 if returnCode == NSAlertSecondButtonReturn{
                     self.chooseLevel(level: 1)
+                    
+                
+                    
                 }
                 else if returnCode == NSAlertThirdButtonReturn{
                     self.chooseLevel(level: 2)
@@ -554,7 +557,24 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     }
     
     func chooseLevel(level : Int){
-        print("Level here - \(level) ")
+        if level == 1{
+            gameSet = level1
+            tileSet = tileSetLevel1
+            print("level 1")
+            
+        }else if level == 2{
+            gameSet = level2
+            tileSet = tileSetLevel2
+            
+            print("level 2")
+        }else{
+            gameSet = level3
+            
+            print("level 3")
+        }
+        tileCollectionView.reloadData()
+        print("reload data")
+        
     }
    
     // MARK: SAVE MAP
