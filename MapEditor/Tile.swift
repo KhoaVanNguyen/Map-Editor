@@ -37,11 +37,35 @@ class Tile {
         self.y = 0
         self.width = 32
         self.height = 32
-
+        
         
     }
-
     
-
+    init(input2 : [String], level : Int) {
+        // input = index - id
+        //index id x y
+        switch level {
+        case 1:
+            self.imageUrl = "level1_\(input2[1])"
+        case 2:
+            self.imageUrl = "level2_\(input2[1])"
+            
+        case 3:
+            self.imageUrl = "level3_\(input2[1])"
+            
+        default:
+            self.imageUrl = input2[1]
+        }
+        
+        self.index = Int(input2[0])!
+        
+        //  self.imageUrl = input2[1]
+        self.id = Int(input2[1])!
+        self.x = 0
+        self.y = 0
+        self.width = 32
+        self.height = 32
+    }
+    
     
 }
