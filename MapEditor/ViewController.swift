@@ -41,7 +41,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     var cursor = NSCursor()
     var currentLevel = 1
     
-    var tileSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",                   "game_7","game_8","game_9","game_10","game_11","game_12",                   "game_13","game_14","game_15","game_16","game_17"]
+    var tileSet = level1
     
     var gameSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",                   "game_7","game_8","game_9","game_10","game_11","game_12",                   "game_13","game_14","game_15","game_16","game_17"]
     
@@ -70,8 +70,8 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         
         // configureTileCollectionView(collectionView: objectCollectionView)
         
-        configureGameObject()
         initTrackBackground()
+        configureGameObject()
         
         self.view.layer?.backgroundColor = CGColor(red: 24, green: 122, blue: 12, alpha: 1)
         
@@ -147,8 +147,8 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             
             item.changeImage(pickingImg)
             
-            let row = index / 48 // 48 == col
-            let col = index - (row * 48)
+            let row = index / COLUMNS // 48 == col
+            let col = index - (row * COLUMNS)
             print(" index = \(index) at: [\(row),\(col)] ")
             // Add to tile list
             let x = col * 32
@@ -290,7 +290,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         
         for i in 0..<numberOfTile{
             let row = i / COLUMNS
-            let col = i - (row * 48)
+            let col = i - (row * COLUMNS)
             //print(" index = \(index) at: [\(row),\(col)] ")
             // Add to tile list
             let x = ( col * TILE_SIZE ) + 16 // OK
@@ -298,6 +298,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             
             listTiles[i].x = x
             listTiles[i].y = y
+            print(" \(listTiles[i].x) - \(listTiles[i].y) ")
         }
         
     }
@@ -307,6 +308,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     // MARK: CONFIGURE TRACKING ARRAYS
     func initTrackBackground(){
         var i = 0
+        listTiles = []
         while ( i < COLUMNS*ROWS){
             trackBackground.append(0)
             
@@ -406,6 +408,8 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         }
         else {
             for i in 0..<listObject.count{
+               // listObjectStr += "\(tileSet.count)" + "\n"
+                listObjectStr += "\(listObject.count) \(SCREEN_WIDTH) \(SCREEN_HEIGHT)" + "\n"
                 listObjectStr += "\(listObject[i].index) \(listObject[i].id) \(listObject[i].x) \(listObject[i].y) \(listObject[i].width) \(listObject[i].height)" + "\n"
             }
             
@@ -427,10 +431,9 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         
         listObjectStr = ""
         quadTreeStr = ""
-        let tree = Tree(left: 0, top: 1536, size: 1536, tiles: listTiles, screen: LIMIT_BG_QUADTREED_SIZE, bitmapHeight: 384)
+        let tree = Tree(left: 0, top: COLUMNS * TILE_SIZE, size: SCREEN_WIDTH, tiles: listTiles, screen: LIMIT_BG_QUADTREED_SIZE, bitmapHeight: SCREEN_HEIGHT)
         tree.Build(node: tree.treeNode!)
         tree.Save(node: tree.treeNode! )
-        
         
         createListObject(listObject: listTiles, isBackground: true)
         showSaveQuadTree(gameObject: listObjectStr, quadTree: quadTreeStr)
@@ -477,6 +480,16 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         createListObject(listObject: listGameObject, isBackground: false)
         showSaveQuadTree(gameObject: listObjectStr, quadTree: quadTreeStr)
     }
+    // MARK: SCAN QUADTREE SIZE
+    
+    @IBAction func backgroundScanChange(_ sender: Any) {
+        LIMIT_BG_QUADTREED_SIZE = Int(quadtreeBgSizeLbl.stringValue)!
+        print(LIMIT_BG_QUADTREED_SIZE)
+    }
+    @IBAction func gameObjectScanSize(_ sender: Any) {
+        LIMIT_GO_QUADTREED_SIZE = Int(quadtreeGOSizeLbl.stringValue)!
+        print(LIMIT_GO_QUADTREED_SIZE)
+    }
     
     // MARK: SELECT ROW & COLUMN
     @IBAction func rowStepper(_ sender: NSStepper) {
@@ -492,18 +505,23 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     @IBAction func rowTextChange(_ sender: NSTextField) {
         
         ROWS = Int(rowLbl.stringValue)!
-        
+        SCREEN_HEIGHT = ROWS * TILE_SIZE
+        initTrackBackground()
         print("ROWS: \(ROWS) - COLUMNS: \(COLUMNS)")
         mapCollectionView.reloadData()
         self.configureMapCollectionView(rows: ROWS, columns: COLUMNS)
-       
+        
     }
     
     @IBAction func columnTextChange(_ sender: Any) {
         COLUMNS = Int(columnLbl.stringValue)!
+        
+        SCREEN_WIDTH = COLUMNS * TILE_SIZE
+        initTrackBackground()
         print("ROWS: \(ROWS) - COLUMNS: \(COLUMNS)")
         mapCollectionView.reloadData()
         self.configureMapCollectionView(rows: ROWS, columns: COLUMNS)
+      
         
         
     }
@@ -646,14 +664,18 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
                 var myStrings = text.components(separatedBy: "\n")
                 // like the txt file already
                 for i in 0..<myStrings.count{
+                   
                     let child = myStrings[i].components(separatedBy: " ")
+                    
                     // child = index id x y => Get the id === imageUrl
                     //index - imageUrl
                     // 452 48 640 288
                     //let tile = Tile(input: child)
                     
-                    let tile = Tile(input2: child, level: 1)
+                    let tile = Tile(input2: child, level: currentLevel)
                     listTiles[i] = tile
+                    
+                    print(listTiles[i].imageUrl)
                     mapCollectionView.reloadData()
                 }
             }
@@ -663,19 +685,13 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             }
         }
     }
-    // MARK: SCAN QUADTREE SIZE
-    @IBAction func quadtreeBGsize(_ sender: Any) {
-        LIMIT_BG_QUADTREED_SIZE = Int(quadtreeBgSizeLbl.stringValue)!
-        
-    }
-    @IBAction func quadtreeGOSize(_ sender: Any) {
-        LIMIT_GO_QUADTREED_SIZE = Int(quadtreeGOSizeLbl.stringValue)!
-    }
+   
     
     @IBAction func eraseBtn(_ sender: Any) {
         changeCursorImge(index: "black")
         isErase = true
     }
+   
 }
 
 

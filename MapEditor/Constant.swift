@@ -18,14 +18,14 @@ var quadTreeStr  = ""
 var globalTiles = [Tile]()
 
 
-var ROWS = 10
-var COLUMNS = 48
+var ROWS = 51
+var COLUMNS = 128
 
-
+var TILE_SIZE = 32
 var SCREEN_WIDTH = COLUMNS * 32
 var SCREEN_HEIGHT =  ROWS * 32
 
-var TILE_SIZE = 32
+
 
 var LIMIT_QUADTREED_SIZE = 200
 var LIMIT_BG_QUADTREED_SIZE = 1536

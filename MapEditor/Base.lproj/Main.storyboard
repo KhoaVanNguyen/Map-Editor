@@ -695,18 +695,18 @@
                                 <rect key="frame" x="0.0" y="141" width="833" height="417"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" ambiguous="YES" id="lvg-Y9-zml">
-                                    <rect key="frame" x="1" y="1" width="816" height="400"/>
+                                    <rect key="frame" x="1" y="1" width="831" height="415"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZg-Q5-brd">
-                                            <rect key="frame" x="0.0" y="20" width="5632" height="1632"/>
+                                            <rect key="frame" x="0.0" y="35" width="6000" height="1632"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="wXz-4N-psQ">
-                                                <rect key="frame" x="1" y="1" width="5630" height="1630"/>
+                                                <rect key="frame" x="1" y="1" width="5998" height="1630"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <collectionView ambiguous="YES" selectable="YES" id="T4d-lO-thK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="5630" height="1630"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="5998" height="1630"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <collectionViewGridLayout key="collectionViewLayout" id="ZRu-9q-LMy">
                                                             <size key="minimumItemSize" width="32" height="32"/>
@@ -730,11 +730,11 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="aHJ-1J-GL5">
-                                    <rect key="frame" x="1" y="401" width="816" height="15"/>
+                                    <rect key="frame" x="1" y="400" width="831" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="Zwz-gi-fep">
-                                    <rect key="frame" x="817" y="1" width="15" height="400"/>
+                                    <rect key="frame" x="816" y="1" width="16" height="415"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -1025,20 +1025,8 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="radar" id="eL0-cq-UCc"/>
                             </imageView>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6fh-9J-YEG">
-                                <rect key="frame" x="446" y="57" width="92" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="1536" drawsBackground="YES" id="eDE-fo-fXh">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <action selector="quadtreeBGsize:" target="XfG-lQ-9wD" id="U8A-4j-bwE"/>
-                                </connections>
-                            </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aRN-si-b2Z">
-                                <rect key="frame" x="446" y="22" width="92" height="22"/>
+                                <rect key="frame" x="447" y="57" width="92" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="1536" drawsBackground="YES" id="zik-yX-Z2A">
                                     <font key="font" metaFont="system"/>
@@ -1046,7 +1034,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="quadtreeGOSize:" target="XfG-lQ-9wD" id="OMJ-9t-EX3"/>
+                                    <action selector="backgroundScanChange:" target="XfG-lQ-9wD" id="NQK-Gw-tKZ"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cKh-vl-iMs">
@@ -1076,6 +1064,18 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6fh-9J-YEG">
+                                <rect key="frame" x="447" y="22" width="92" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="1536" drawsBackground="YES" id="eDE-fo-fXh">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="gameObjectScanSize:" target="XfG-lQ-9wD" id="LaR-oW-AEs"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Kxj-iM-TUP" firstAttribute="leading" secondItem="gju-rx-5Ep" secondAttribute="trailing" constant="15" id="0ae-3z-ROt"/>
@@ -1102,11 +1102,12 @@
                         <outlet property="backgroundScrollView" destination="Obz-af-cns" id="poB-hY-0cT"/>
                         <outlet property="columnLbl" destination="kXu-an-QuY" id="11x-Cq-2Y8"/>
                         <outlet property="currentImg" destination="jL6-Da-ihV" id="d3Q-Rg-Q5j"/>
+                        <outlet property="gameObjectScanChange" destination="6fh-9J-YEG" id="8jX-Vg-hu4"/>
                         <outlet property="gameObjectSrollView" destination="81P-2f-V3u" id="i0X-1I-OXb"/>
                         <outlet property="mapCollectionView" destination="T4d-lO-thK" id="744-du-h2y"/>
                         <outlet property="objectCollectionView" destination="h3r-T0-gzY" id="Dtv-G6-0Q2"/>
-                        <outlet property="quadtreeBgSizeLbl" destination="6fh-9J-YEG" id="68V-EV-fj4"/>
-                        <outlet property="quadtreeGOSizeLbl" destination="aRN-si-b2Z" id="fj1-ki-8aB"/>
+                        <outlet property="quadtreeBgSizeLbl" destination="aRN-si-b2Z" id="013-Ep-2iE"/>
+                        <outlet property="quadtreeGOSizeLbl" destination="6fh-9J-YEG" id="LfA-eG-x7W"/>
                         <outlet property="rowLbl" destination="rMz-3v-EFL" id="VxO-C5-5BL"/>
                         <outlet property="tileCollectionView" destination="Vq6-Hr-HFP" id="8yU-HI-0Fh"/>
                     </connections>
