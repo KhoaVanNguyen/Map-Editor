@@ -141,7 +141,9 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         if collectionView == self.mapCollectionView{
             let index = convertToStringFrom(indexPaths)
             let item = collectionView.item(at: index) as! CollectionViewItem
-            //item.changeImage("\(currentTileID)")
+            
+            
+            item.changeImage("\(currentTileID)")
             
             item.changeImage(pickingImg)
             
@@ -650,7 +652,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
                     // 452 48 640 288
                     //let tile = Tile(input: child)
                     
-                    let tile = Tile(input2: child, level: 2)
+                    let tile = Tile(input2: child, level: 1)
                     listTiles[i] = tile
                     mapCollectionView.reloadData()
                 }
