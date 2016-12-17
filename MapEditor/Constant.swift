@@ -18,8 +18,8 @@ var quadTreeStr  = ""
 var globalTiles = [Tile]()
 
 
-var ROWS = 51
-var COLUMNS = 128
+var ROWS = 10
+var COLUMNS = 48
 
 var TILE_SIZE = 32
 var SCREEN_WIDTH = COLUMNS * 32

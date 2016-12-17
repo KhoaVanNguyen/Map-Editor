@@ -43,7 +43,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     var tileSet = level1
     
-    var gameSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",                   "game_7","game_8","game_9","game_10","game_11","game_12",                   "game_13","game_14","game_15","game_16","game_17"]
+    var gameSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",                   "game_7","game_8","game_9","game_10","game_11","game_12",                   "game_13","game_14","game_15","game_16","game_17","game_18","game_19"]
     
     var trackBackground = [Int]()
     var trackGameObject = [Int]()
@@ -185,6 +185,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
                         if trackForDelete[i].track == index{
                             print("Da xoa: index =  \(trackForDelete[i].index) - track = \(trackForDelete[i].track) ")
                             listGameObject.remove(at: trackForDelete[i].index)
+                           // listGameObject.remove(at: i)
                             break
                         }
                     }
@@ -399,21 +400,22 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     func createListObject(listObject : [Tile], isBackground : Bool ){
         if ( isBackground ){
             listObjectStr += "\(tileSet.count)" + "\n"
-        }
-        listObjectStr += "\(listObject.count) \(SCREEN_WIDTH) \(SCREEN_HEIGHT)" + "\n"
-        if ( isBackground ){
+            
             for i in 0..<listObject.count{
                 listObjectStr += "\(listObject[i].index) \(listObject[i].id) \(listObject[i].x) \(listObject[i].y)" + "\n"
             }
+
         }
         else {
+            listObjectStr += "\(listObject.count) \(SCREEN_WIDTH) \(SCREEN_HEIGHT)" + "\n"
+            
             for i in 0..<listObject.count{
-               // listObjectStr += "\(tileSet.count)" + "\n"
-                listObjectStr += "\(listObject.count) \(SCREEN_WIDTH) \(SCREEN_HEIGHT)" + "\n"
+                // listObjectStr += "\(tileSet.count)" + "\n"
+               // listObjectStr += "\(listObject.count) \(SCREEN_WIDTH) \(SCREEN_HEIGHT)" + "\n"
                 listObjectStr += "\(listObject[i].index) \(listObject[i].id) \(listObject[i].x) \(listObject[i].y) \(listObject[i].width) \(listObject[i].height)" + "\n"
             }
-            
         }
+        
         
     }
     
@@ -473,7 +475,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     @IBAction func saveObjects(_ sender: Any) {
         listObjectStr = ""
         quadTreeStr = ""
-        let gameObjectTree = Tree(left: 0, top: 1536, size: 1536, tiles: listGameObject, screen: LIMIT_GO_QUADTREED_SIZE, bitmapHeight: 384)
+        let gameObjectTree = Tree(left: 0, top: COLUMNS * TILE_SIZE, size: SCREEN_WIDTH, tiles: listGameObject, screen: LIMIT_GO_QUADTREED_SIZE, bitmapHeight: SCREEN_HEIGHT)
         
         gameObjectTree.Build(node: gameObjectTree.treeNode!)
         gameObjectTree.Save(node: gameObjectTree.treeNode!)
