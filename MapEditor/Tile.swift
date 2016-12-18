@@ -52,6 +52,8 @@ class Tile {
             
         case 3:
             self.imageUrl = "level3_\(input2[1])"
+        case 4:
+            self.imageUrl = "level4_\(input2[1])"
             
         default:
             self.imageUrl = input2[1]

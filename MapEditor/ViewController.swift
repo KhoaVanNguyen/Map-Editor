@@ -517,7 +517,6 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     @IBAction func columnTextChange(_ sender: Any) {
         COLUMNS = Int(columnLbl.stringValue)!
-        
         SCREEN_WIDTH = COLUMNS * TILE_SIZE
         initTrackBackground()
         print("ROWS: \(ROWS) - COLUMNS: \(COLUMNS)")
@@ -527,9 +526,20 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         
         
     }
+    func changeMapSize(rows : Int, cols : Int){
+        
+        ROWS = rows
+        COLUMNS = cols
+        SCREEN_WIDTH = COLUMNS * TILE_SIZE
+        SCREEN_HEIGHT = ROWS * TILE_SIZE
+        print("ROWS: \(ROWS) - COLUMNS: \(COLUMNS)")
+        initTrackBackground()
+        mapCollectionView.reloadData()
+        self.configureMapCollectionView(rows: ROWS, columns: COLUMNS)
+        
+    }
     // MARK: SEGMENT CONTROL
     @IBAction func segmentCellchange(_ sender: NSSegmentedCell) {
-        
         // game
         if ( sender.selectedSegment == 1 ){
             backgroundScrollView.isHidden = true
@@ -552,12 +562,13 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             alert.addButton(withTitle: "LEVEL 1")
             alert.addButton(withTitle: "LEVEL 2")
             alert.addButton(withTitle: "LEVEL 3")
-            
+            alert.addButton(withTitle: "LEVEL 4")
             
             
             
             alert.beginSheetModal(for: self.view.window!, completionHandler: { returnCode -> Void in
                 if returnCode == NSAlertSecondButtonReturn{
+                    self.changeMapSize(rows: 10, cols: 48)
                     self.chooseLevel(level: 1)
                     
                     
@@ -567,9 +578,13 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
                     self.chooseLevel(level: 2)
                 }
                 else if returnCode == NSAlertThirdButtonReturn + 1{
+                    self.changeMapSize(rows: 51, cols: 128)
                     self.chooseLevel(level: 3)
                 }
-                
+                else if returnCode == NSAlertThirdButtonReturn + 2{
+                    self.changeMapSize(rows: 19, cols: 112)
+                    self.chooseLevel(level: 4)
+                }
                 
             })
             
@@ -604,11 +619,14 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             currentLevel = 2
             
             print("level 2")
-        }else{
+        }else if level == 3{
             
             tileSet = level3
             currentLevel = 3
             print("level 3")
+        }else {
+            tileSet = level4
+            currentLevel = 4
         }
         tileCollectionView.reloadData()
         print("reload data")
