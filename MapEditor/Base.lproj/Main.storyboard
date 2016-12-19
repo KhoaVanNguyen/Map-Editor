@@ -695,18 +695,18 @@
                                 <rect key="frame" x="0.0" y="141" width="833" height="417"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" ambiguous="YES" id="lvg-Y9-zml">
-                                    <rect key="frame" x="1" y="1" width="831" height="415"/>
+                                    <rect key="frame" x="1" y="1" width="816" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZg-Q5-brd">
-                                            <rect key="frame" x="0.0" y="35" width="6000" height="1632"/>
+                                            <rect key="frame" x="0.0" y="20" width="8000" height="1632"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="wXz-4N-psQ">
-                                                <rect key="frame" x="1" y="1" width="5998" height="1630"/>
+                                                <rect key="frame" x="1" y="1" width="7998" height="1630"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <collectionView ambiguous="YES" selectable="YES" id="T4d-lO-thK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="5998" height="1630"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="7998" height="1630"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <collectionViewGridLayout key="collectionViewLayout" id="ZRu-9q-LMy">
                                                             <size key="minimumItemSize" width="32" height="32"/>
@@ -730,11 +730,11 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="aHJ-1J-GL5">
-                                    <rect key="frame" x="1" y="400" width="831" height="16"/>
+                                    <rect key="frame" x="1" y="401" width="816" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="Zwz-gi-fep">
-                                    <rect key="frame" x="816" y="1" width="16" height="415"/>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.013798701298701298" horizontal="NO" id="Zwz-gi-fep">
+                                    <rect key="frame" x="817" y="1" width="15" height="400"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -1076,6 +1076,28 @@
                                     <action selector="gameObjectScanSize:" target="XfG-lQ-9wD" id="LaR-oW-AEs"/>
                                 </connections>
                             </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lEV-pp-38k">
+                                <rect key="frame" x="860" y="94" width="107" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" title="Remove All" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ehu-yk-T0d">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="removeAllGameObject:" target="XfG-lQ-9wD" id="64P-Zl-kDX"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ldO-Tx-nj4">
+                                <rect key="frame" x="983" y="94" width="107" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" title="Load " bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="J45-cu-4Tx">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="loadGameObject:" target="XfG-lQ-9wD" id="Mo9-fI-W2m"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Kxj-iM-TUP" firstAttribute="leading" secondItem="gju-rx-5Ep" secondAttribute="trailing" constant="15" id="0ae-3z-ROt"/>
@@ -1124,7 +1146,7 @@
         <image name="export" width="32" height="32"/>
         <image name="folder32" width="46.080001831054688" height="46.080001831054688"/>
         <image name="game_0" width="32" height="32"/>
-        <image name="game_12" width="49.5" height="48"/>
+        <image name="game_12" width="48" height="24"/>
         <image name="radar" width="32" height="32"/>
         <image name="save" width="37.770492553710938" height="37.770492553710938"/>
         <image name="select" width="32" height="32"/>

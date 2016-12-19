@@ -29,8 +29,8 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     var isDrawBG = true
     var isErase = false
     
-    var currentTileID = 0;
-    
+    var currentTileID = 0
+    var leftBrickX = 0
     var pickingImg = "black"
     var exportedImage = NSImage()
     
@@ -43,7 +43,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     var tileSet = level1
     
-    var gameSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",                   "game_7","game_8","game_9","game_10","game_11","game_12",                   "game_13","game_14","game_15","game_16","game_17","game_18","game_19"]
+    
     
     var trackBackground = [Int]()
     var trackGameObject = [Int]()
@@ -138,6 +138,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     }
     
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+        
         if collectionView == self.mapCollectionView{
             let index = convertToStringFrom(indexPaths)
             let item = collectionView.item(at: index) as! CollectionViewItem
@@ -151,8 +152,11 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             let col = index - (row * COLUMNS)
             print(" index = \(index) at: [\(row),\(col)] ")
             // Add to tile list
+            
             let x = col * 32
-            let y = row * 32
+            let tempY = row * 32
+            let y = SCREEN_HEIGHT - tempY
+      
             // track
             if ( isDrawBG ){
                 trackBackground[index] = currentTileID
@@ -160,13 +164,33 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
                 let tile = Tile(url:  "\(currentTileID)", index: index, id:currentTileID, x: x, y: y, width: 32, height: 32)
                 listTiles[index] = tile
             }else {
-                let tile = Tile(url:  "\(currentTileID)", index: listGameObject.count, id:currentTileID, x: x, y: y, width: 32, height: 32)
+            
+                print("CurrentID \(currentTileID)")
+                if currentTileID == 25 {
+                    print("Co vo left")
+                    leftBrickX = x
+                }
+                else if currentTileID == 26 {
+                        print("Cos vo right")
+                        print("distance is \( x - leftBrickX)")
+                    
+                    // tạo cục gạch với kích thước dài :))
+                    let tile = Tile(url:  "\(0)", index: listGameObject.count, id:0, x: leftBrickX + 16, y: y - 16, width: (x - leftBrickX) + 32, height: 32)
+                    listGameObject.append(tile)
+                    
+                    let track = Track(index: listGameObject.count, track: index)
+                    trackForDelete.append(track)
+                  
+                }
+                    //( currentTileID != 25 || currentTileID != 26 )
+                else  {
+                let tile = Tile(url:  "\(currentTileID)", index: listGameObject.count, id:currentTileID, x: x + 16, y: y-16, width: 32, height: 32)
                 listGameObject.append(tile)
                 
                 let track = Track(index: listGameObject.count, track: index)
                 trackForDelete.append(track)
-                
-                print("Da them: index =  \(track.index) - track = \(track.track)")
+                }
+                //print("Da them: index =  \(track.index) - track = \(track.track)")
                 
             }
             
@@ -582,7 +606,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
                     self.chooseLevel(level: 3)
                 }
                 else if returnCode == NSAlertThirdButtonReturn + 2{
-                    self.changeMapSize(rows: 19, cols: 112)
+                    self.changeMapSize(rows: 39, cols: 224)
                     self.chooseLevel(level: 4)
                 }
                 
@@ -678,6 +702,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         if i == NSModalResponseOK{
             let fileUrl = openPanel.url!
             let filePath = fileUrl.absoluteURL
+            print("file:///Users/khoa/Desktop/level%20map/level4.txt")
             print(filePath)
             do {
                 let text = try String(contentsOf: filePath, encoding: String.Encoding.utf8)
@@ -711,7 +736,13 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         changeCursorImge(index: "black")
         isErase = true
     }
-   
+   // MARK: LOAD GAME OBJECT
+    
+    @IBAction func removeAllGameObject(_ sender: Any) {
+        listGameObject = []
+    }
+    @IBAction func loadGameObject(_ sender: Any) {
+    }
 }
 
 
