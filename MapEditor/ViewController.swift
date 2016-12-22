@@ -127,7 +127,6 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             item.loadImage(imgUrl: gameSet[indexPath.item])
             return item
         }
-            
         else {
             let item = collectionView.makeItem(withIdentifier: "TileCollectionViewItem", for: indexPath) as! TileCollectionViewItem
             // item.loadTile("\(tileSet[indexPath.item])")
@@ -175,7 +174,8 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
                         print("distance is \( x - leftBrickX)")
                     
                     // tạo cục gạch với kích thước dài :))
-                    let tile = Tile(url:  "\(0)", index: listGameObject.count, id:0, x: leftBrickX + 16, y: y - 16, width: (x - leftBrickX) + 32, height: 32)
+                    let tempX = leftBrickX + ((x - leftBrickX) / 2 )
+                    let tile = Tile(url:  "\(0)", index: listGameObject.count, id:0, x: tempX, y: y - 16, width: (x - leftBrickX) + 32, height: 32)
                     listGameObject.append(tile)
                     
                     let track = Track(index: listGameObject.count, track: index)
