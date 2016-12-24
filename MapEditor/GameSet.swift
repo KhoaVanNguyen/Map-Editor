@@ -9,11 +9,8 @@
 import Foundation
 
 var gameSet = ["game_0","game_1","game_2","game_3","game_4","game_5","game_6",                   "game_7","game_8","game_9","game_10","game_11","game_12",                   "game_13","game_14","game_15","game_16","game_17","game_18","game_19",
-"game_20","game_21","game_22","game_23","game_24","game_25", "game_26"]
-
+"game_20","game_21","game_22","game_23","game_24","game_25", "game_26","game_27","game_28", "game_29"]
 let level1 = ["level1_0","level1_1","level1_2","level1_3","level1_4","level1_5","level1_6","level1_7","level1_8","level1_9","level1_10","level1_11","level1_12","level1_13","level1_14","level1_15","level1_16","level1_17","level1_18","level1_19","level1_20","level1_21","level1_22","level1_23","level1_24","level1_25","level1_26","level1_27","level1_28","level1_29","level1_30","level1_31","level1_32","level1_33","level1_34","level1_35","level1_36","level1_37","level1_38","level1_39","level1_40","level1_41","level1_42","level1_43","level1_44","level1_45","level1_46","level1_47","level1_48"]
-
-
 let level2 = ["level2_0", "level2_1", "level2_2", "level2_3", "level2_4", "level2_5", "level2_6", "level2_7", "level2_8", "level2_9", "level2_10", "level2_11", "level2_12", "level2_13", "level2_14", "level2_15", "level2_16", "level2_17", "level2_18", "level2_19", "level2_20", "level2_21", "level2_22", "level2_23", "level2_24", "level2_25", "level2_26", "level2_27", "level2_28", "level2_29", "level2_30", "level2_31", "level2_32", "level2_33", "level2_34", "level2_35", "level2_36", "level2_37", "level2_38", "level2_39", "level2_40", "level2_41", "level2_42", "level2_43", "level2_44", "level2_45", "level2_46", "level2_47", "level2_48", "level2_49", "level2_50", "level2_51", "level2_52", "level2_53", "level2_54", "level2_55", "level2_56", "level2_57", "level2_58", "level2_59", "level2_60", "level2_61", "level2_62", "level2_63", "level2_64", "level2_65", "level2_66", "level2_67", "level2_68", "level2_69", "level2_70", "level2_71", "level2_72", "level2_73", "level2_74", "level2_75", "level2_76", "level2_77", "level2_78", "level2_79", "level2_80", "level2_81", "level2_82", "level2_83", "level2_84", "level2_85", "level2_86", "level2_87", "level2_88", "level2_89", "level2_90", "level2_91", "level2_92", "level2_93", "level2_94", "level2_95", "level2_96", "level2_97", "level2_98", "level2_99", "level2_100", "level2_101", "level2_102", "level2_103", "level2_104", "level2_105", "level2_106", "level2_107", "level2_108", "level2_109", "level2_110", "level2_111", "level2_112", "level2_113"]
 
 

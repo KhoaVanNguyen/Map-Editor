@@ -664,12 +664,28 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
         
         var finalStr = ""
         
-        //id index x y
+        
+        
+        
+        
+        
+        //Format: id index x y
+//        
+//        for i in 0..<listTiles.count{
+//            finalStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)" + "\n"
+//            if (i == listTiles.count - 1) {
+//                finalStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)"
+//            }
+//        }
+        
+        //Format: id ,
         
         for i in 0..<listTiles.count{
-            finalStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)" + "\n"
+            finalStr += "\(listTiles[i].id)" + ","
+            
+            // this is last one! not add comma
             if (i == listTiles.count - 1) {
-                finalStr += "\(listTiles[i].index) \(listTiles[i].id) \(listTiles[i].x) \(listTiles[i].y)"
+                finalStr += "\(listTiles[i].id)"
             }
         }
         
