@@ -31,6 +31,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
     
     var currentTileID = 0
     var leftBrickX = 0
+    var upBrickY = 0
     var pickingImg = "black"
     var exportedImage = NSImage()
     
@@ -165,22 +166,24 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
             }else {
             
                 print("CurrentID \(currentTileID)")
-                if currentTileID == 25 {
+                if currentTileID == 25  {
                     print("Co vo left")
+                    
                     leftBrickX = x
+                    
                 }
-                else if currentTileID == 26 {
+                else if currentTileID == 26  {
                         print("Cos vo right")
                         print("distance is \( x - leftBrickX)")
                     
-                    // tạo cục gạch với kích thước dài :))
-                    let tempX = leftBrickX + ((x - leftBrickX) / 2 )
-                    let tile = Tile(url:  "\(0)", index: listGameObject.count, id:0, x: tempX, y: y - 16, width: (x - leftBrickX) + 32, height: 32)
-                    listGameObject.append(tile)
+                        // tạo cục gạch với kích thước dài chiều ngang ID = 0 :))
+                        let tempX = leftBrickX + ((x - leftBrickX) / 2 )
+                        let tile = Tile(url:  "\(0)", index: listGameObject.count, id:0, x: tempX, y: y - 16, width: (x - leftBrickX) + 32, height: 32)
+                        listGameObject.append(tile)
                     
-                    let track = Track(index: listGameObject.count, track: index)
+                        let track = Track(index: listGameObject.count, track: index)
                     trackForDelete.append(track)
-                  
+                            
                 }
                     //( currentTileID != 25 || currentTileID != 26 )
                 else  {
