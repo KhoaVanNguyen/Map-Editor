@@ -177,7 +177,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
                         print("distance is \( x - leftBrickX)")
                     
                         // tạo cục gạch với kích thước dài chiều ngang ID = 0 :))
-                        let tempX = leftBrickX + ((x - leftBrickX) / 2 )
+                        let tempX = (leftBrickX + ((x - leftBrickX) / 2 ) ) + 16
                         let tile = Tile(url:  "\(0)", index: listGameObject.count, id:0, x: tempX, y: y - 16, width: (x - leftBrickX) + 32, height: 32)
                         listGameObject.append(tile)
                     
@@ -187,7 +187,7 @@ class ViewController: NSViewController, NSCollectionViewDataSource , NSCollectio
                 }
                     //( currentTileID != 25 || currentTileID != 26 )
                 else  {
-                let tile = Tile(url:  "\(currentTileID)", index: listGameObject.count, id:currentTileID, x: x + 16, y: y-16, width: 32, height: 32)
+                let tile = Tile(url:  "\(currentTileID)", index: listGameObject.count, id:currentTileID, x: x + 16, y: y, width: 32, height: 32)
                 listGameObject.append(tile)
                 
                 let track = Track(index: listGameObject.count, track: index)
